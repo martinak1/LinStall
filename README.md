@@ -7,8 +7,8 @@ This is for my Senior Projects in Information Systems seminar at VCU. The requir
 
 Deliverables:
 
-  (9/11) - Create a valid, mobile friendly, and responsive website. It must feature three products to sell and must pass the
-           W3c HTML & CSS validators and the Google mobile friendly test.
+  (9/11) - Create a valid, mobile friendly, and responsive website. It must feature three products to sell, must pass the
+           W3c HTML & CSS validators, and the Google mobile friendly test.
  
  
  
