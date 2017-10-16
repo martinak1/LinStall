@@ -26,7 +26,7 @@ function MakeTheForm($ValidationErrors) {
   // error symbol 
   $RedSplat = " <span class=\"Flag\">* </span> ";
 
-  $TheForm = "<h2>Create an account and talk to other Linux enthusiest!</h2>";
+  $TheForm = "<h3>Create an account and talk to other Linux enthusiest!</h3>";
   
     // first name
     if (isset($ValidationErrors['fName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
@@ -95,6 +95,7 @@ $favDistro
 
   $favDistro= '';
 
+  $theForm .= "         <label for=\"distroUsed\" class=\"form-control\">Distros Used</label>\n";
   while ($distro = fgets($distroFile)) {
 
     $distro= trim($distro);
@@ -124,6 +125,7 @@ $favDistro
     <fieldset>
       <div class=\"Row\">\n";
 
+  // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "   <div class=\"Col-12\">       
           <label for=\"bio\" class=\"WideLabel\">$SplatSlug Bio: </label>      
@@ -132,7 +134,7 @@ $favDistro
         </div>
       <div class=\"Row\"><br />";
 
-  //Hard coded small select           
+  //Hard coded small select for most hated distro
   if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
         <div class=\"Col-4\">
@@ -232,14 +234,14 @@ elseif ($View == 'Submit Form') {
   // hated distro
   if (!isset($hatedDist) or $hatedDist == '') {
     $_POST['hatedDist'] = '';
-    $ValidationErrors['hatedDist'] = "Please select your least favorite weather.";
+    $ValidationErrors['hatedDist'] = "Please select your least favorite distro.";
   }
 
   // favorite distro
   if (!isset($favDistro) or $favDistro== '') $ValidationErrors['favDistro'] = "Please select the distro you like the most.";
 
-  // don't know what this is
-  if (!isset($MASEStateFavorite) or $MASEStateFavorite  == '') $ValidationErrors['MASEStateFavorite'] = "You must select your favorite Southeastern state to have your application considered.";
+  // least favorite distro 
+  if (!isset($hatedDist) or $hatedDist == '') $ValidationErrors['hatedDist'] = "You must select your least favorite distro.";
 
   // password
   if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) {
@@ -275,18 +277,17 @@ elseif ($View == 'Submit Form') {
 
   // build form tags
   $UI .= "<form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
-  $UI .= "<h2>SeSDoC Membership Application</h2>\n";
+  $UI .= "<h2>Linstall Account Creation</h2>\n";
 
   // append the js validator
   $UI .= MakeTheForm($ValidationErrors);
   $UI .= " <p>Run JS ValidateForm: <input type=\"checkbox\" name=\"RunJS\" id=\"RunJS\" checked=\"checked\">  Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> if changes have been made.  </p>
  </form>\n";
-  $UI .= "<p>Use your browser's 'back button' or Alt + Left Arrow to return to the previous page...</p>";
   
 } 
 // error figuring out the view
 else {
-  $UI = "<p><font color=red>! </font>Somehow we don't know what your next view should be '$View' is not valid...</p>";
+  $UI = "<p>Somehow we don't know what your next view should be '$View' is not valid...</p>";
 }
 
 // assemble the dynamic content
