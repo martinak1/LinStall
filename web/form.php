@@ -85,7 +85,7 @@ function MakeTheForm($ValidationErrors) {
             </p>  <br />   \n";
 
   // distros used and favorite distro
-  $distroFile = fopen('../distros.txt','r');
+  $distroFile = fopen('../distros','r');
 
   $favDistro= '';
 
