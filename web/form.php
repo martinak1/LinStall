@@ -84,6 +84,8 @@ function MakeTheForm($ValidationErrors) {
             <input class=\"form-control\" type=\"text\" name=\"zip\" id=\"zip\" value=\"$zip\"/>
             </p>  <br />   \n";
 
+  <fieldset><legend>Tell us about yourself!</legend>
+
   // distros used and favorite distro
   $distroFile = fopen('../distros','r');
 
@@ -98,11 +100,12 @@ function MakeTheForm($ValidationErrors) {
 
     if (isset($distrosUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
-    } else {
+    } 
+    else {
       $CheckedSlug = '';
     }
     $TheForm .= "       <label for=\"Visited$distroNoSpaces\" class=\"WideLabel\">
-         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$AStateNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
+         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>\n";
     if (isset($favDistro) and $distro == $favDistro) {
       $CheckedSlug = 'checked';
@@ -114,7 +117,6 @@ function MakeTheForm($ValidationErrors) {
        </label>";
   }
   $TheForm .= "    </fieldset>
-    <fieldset><legend>Tell us about yourself!</legend>
 $favDistro
     </fieldset>";
 
@@ -163,7 +165,7 @@ $favDistro
   while ($language = fgets($languageFile)) {
     $language = trim($language);
 
-    if (isset($MAOtherStatesVisited) and $MAOtherStatesVisited != '' and in_array($AState, $MAOtherStatesVisited)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    if (isset($language) and $language != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
     $TheForm .= "             <option value=\"$AState\" $SelectedSlug >$AState</option>\n";
   }
 
