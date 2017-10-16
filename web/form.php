@@ -258,7 +258,7 @@ elseif ($View == 'Submit Form') {
   $UI = "<p><font color=red>! </font>Somehow we don't know what your next view should be '$View' is not valid...</p>";
 }
 $FormTemplate = file_get_contents('template.html');
-$FormTemplate = str_replace('[[[TheForm]]]', $UI, $FormTemplate);
+$FormTemplate = str_replace('[[[DynamicContent]]]', $UI, $FormTemplate);
 echo $FormTemplate;
 exit;
 ?>
