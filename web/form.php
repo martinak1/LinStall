@@ -56,7 +56,7 @@ function MakeTheForm($ValidationErrors) {
             <input class=\"form-control\" type=\"text\" name=\"pass1\" id=\"pass1\" value=\"$pass1\"/>
           </p><br /> \n";
     $TheForm .= "      
-            <p><label class=\"col-sm-2 control-label\" for=\"pass2\">Verify password:</label>
+            <p><label class=\"col-sm-2 control-label\" for=\"pass2\">Password, again:</label>
             <input class=\"form-control\" type=\"text\" name=\"pass2\" id=\"pass2\" value=\"$pass2\"/>
           </p><br /> \n";
 
@@ -116,9 +116,9 @@ $favDistro
     } else {
       $CheckedSlug = '';
     }
-    $favDistro .= "       <p><label for=\"Fav$distro\" class=\"WideLabel\">
+    $favDistro .= "       <label for=\"Fav$distro\" class=\"WideLabel\">
          <input type=\"radio\" name=\"favDistro\" id=\"Fav$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
-       </label></p>\n";
+       </label>";
   }
 
   $TheForm .= "
@@ -155,21 +155,20 @@ $favDistro
            </select>
         </div>\n";
 
-  //Multi-select using contents of the languages file
+  //Multi-select using contents of text file with Options...
   $TheForm .= "
         <div class=\"Col-4\">
-          <label class=\"col-sm-2 form-control wide-label\" for=\"languages\" ">Programming Languages known?<br />
+          <label class=\"col-sm-2 form-control\" for=\"languages\" class=\"WideLabel\">Programming Languages known?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
           <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
 
   $languageFile = fopen('../languages','r');
 
-  // build the options in the list
   while ($language = fgets($languageFile)) {
     $language = trim($language);
 
-    if (isset($languagesKnown) and $languagesKnown!= '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
-    $TheForm .= "             <option value=\"$language\" $SelectedSlug >$langauge</option>\n";
+    if (isset($MAOtherStatesVisited) and $MAOtherStatesVisited != '' and in_array($AState, $MAOtherStatesVisited)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    $TheForm .= "             <option value=\"$AState\" $SelectedSlug >$AState</option>\n";
   }
 
   $TheForm .= "          </select>
