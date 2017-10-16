@@ -244,7 +244,7 @@ elseif ($View == 'Submit Form') {
     if we felt like it.  You're welcome to make any corrections that might be 
     needed click Submit Form...</p>";
   }
-  $UI .= "<form method=\"POST\" name=\"SeSDoCForm\" action=\"SeSDoCForm.php\" onSubmit=\"return ValidateForm();\">\n";
+  $UI .= "<form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
   $UI .= "<h2>SeSDoC Membership Application</h2>\n";
   $UI .= MakeTheForm($ValidationErrors);
   $UI .= " <p>Run JS ValidateForm: <input type=\"checkbox\" name=\"RunJS\" id=\"RunJS\" checked=\"checked\">  Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> if changes have been made.  </p>
