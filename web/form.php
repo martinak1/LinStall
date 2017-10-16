@@ -204,27 +204,45 @@ elseif ($View == 'Submit Form') {
   extract($_POST);
 
   //Validate what came back.
-  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Name is missing or empty.  Please enter your name before clicking Submit.";
+
+  // first name
+  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Your first name is missing or empty. Please enter your name before clicking Submit.";
+
+  // last name
+  if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Your last name is missing or empty.  Please enter your name before clicking Submit.";
+
+  // email
   if (!isset($email) or $email == '') {
     $ValidationErrors['email'] = "The email address is empty.  Please enter your email address before clicking Submit.";
-  } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+  }
+  elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     $ValidationErrors['email'] = "The email  is not a valid format.";
   }
-  if (!isset($MASMS) or strlen($MASMS) < 10) $ValidationErrors['MASMS'] = "Please enter the 10-digit number where you receive text messages.";
-  if (!isset($MAOpinion) or strlen($MAOpinion) < 50) $ValidationErrors['MAOpinion'] = "Please opine for at least 50 characters. Your opinion weighs heavily on our decision to accept you into the society.";
-  if (!isset($MALeastFavoriteWeather) or $MALeastFavoriteWeather == '') {
-    $_POST['MALeastFavoriteWeather'] = '';
-    $ValidationErrors['MALeastFavoriteWeather'] = "Please select your least favorite weather.";
+
+  // zip
+  if (!isset($zip) or strlen($zip) < 5) $ValidationErrors['zip'] = "Please enter your zip code.";
+
+  // bio
+  if (!isset($bio) or strlen($bio) < 50) $ValidationErrors['bio'] = "Please give a short description about yourself.";
+
+  // hated distro
+  if (!isset($hatedDist) or $hatedDist == '') {
+    $_POST['hatedDist'] = '';
+    $ValidationErrors['hatedDist'] = "Please select your least favorite weather.";
   }
-  if (!isset($MAColor) or $MAColor == '') $ValidationErrors['MAColor'] = "Please select your favorite, or least un-favorite, color.";
+
+  // favorite distro
+  if (!isset($favDistro) or $favDistro== '') $ValidationErrors['favDistro'] = "Please select the distro you like the most.";
   if (!isset($MASEStateFavorite) or $MASEStateFavorite  == '') $ValidationErrors['MASEStateFavorite'] = "You must select your favorite Southeastern state to have your application considered.";
+
+  // password
   if ((!isset($pass11) or $pass11  == '') or (!isset($pass12) or $pass12  == '')) {
     $ValidationErrors['pass1'] = "Enter your password twice, please.";
   } elseif ($pass11 != $pass12) {
     $ValidationErrors['pass1'] = "Passwords do not match.";
   }
 
-  //$CountSEStates
+  // error output
   $UI = '';
   if (is_array($ValidationErrors)) {
     $ErrorCount = count($ValidationErrors);
@@ -243,20 +261,23 @@ elseif ($View == 'Submit Form') {
     if we felt like it.  You're welcome to make any corrections that might be 
     needed click Submit Form...</p>";
   }
+
+  // build form tags
   $UI .= "<form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
   $UI .= "<h2>SeSDoC Membership Application</h2>\n";
+
+  // append the js validator
   $UI .= MakeTheForm($ValidationErrors);
   $UI .= " <p>Run JS ValidateForm: <input type=\"checkbox\" name=\"RunJS\" id=\"RunJS\" checked=\"checked\">  Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> if changes have been made.  </p>
      <p>Click <a href=\"#\" onClick=\"PopupAbout()\">About the Form</a> to pop up notes about the form, JavaScript, and PHP.</p>
  </form>";
-  if ($PoppedUp) {
-    $UI .= "<p>Click <input type=button value='Close Window' onclick='window.close()'> to close this window when you're done making changes...</p>";
-  } else {
-    $UI .= "<p>Use your browser's 'back button' or Alt + Left Arrow to return to the previous page...</p>";
+  $UI .= "<p>Use your browser's 'back button' or Alt + Left Arrow to return to the previous page...</p>";
   }
 } else {
   $UI = "<p><font color=red>! </font>Somehow we don't know what your next view should be '$View' is not valid...</p>";
 }
+
+// assemble the dynamic content
 $FormTemplate = file_get_contents('template.html');
 $FormTemplate = str_replace('[[[DynamicContent]]]', $UI, $FormTemplate);
 echo $FormTemplate;
