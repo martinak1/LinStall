@@ -84,7 +84,8 @@ function MakeTheForm($ValidationErrors) {
             <input class=\"form-control\" type=\"text\" name=\"zip\" id=\"zip\" value=\"$zip\"/>
             </p>  <br />   \n";
 
-  <fieldset><legend>Tell us about yourself!</legend>
+  $TheForm .= "        </fieldset>
+      <fieldset><legend>Tell us about yourself!</legend>\n";
 
   // distros used and favorite distro
   $distroFile = fopen('../distros','r');
@@ -104,7 +105,7 @@ function MakeTheForm($ValidationErrors) {
     else {
       $CheckedSlug = '';
     }
-    $TheForm .= "       <label for=\"Visited$distroNoSpaces\" class=\"WideLabel\">
+    $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"WideLabel\">
          <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>\n";
     if (isset($favDistro) and $distro == $favDistro) {
@@ -116,7 +117,6 @@ function MakeTheForm($ValidationErrors) {
          <input type=\"radio\" name=\"favDistro\" id=\"Fav$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>";
   }
-  $TheForm .= "    </fieldset>
 $favDistro
     </fieldset>";
 
@@ -166,7 +166,7 @@ $favDistro
     $language = trim($language);
 
     if (isset($language) and $language != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
-    $TheForm .= "             <option value=\"$AState\" $SelectedSlug >$AState</option>\n";
+    $TheForm .= "             <option value=\"$language\" $SelectedSlug >$language</option>\n";
   }
 
   $TheForm .= "          </select>
@@ -251,6 +251,7 @@ elseif ($View == 'Submit Form') {
 
   // error output
   $UI = '';
+
   if (is_array($ValidationErrors)) {
     $ErrorCount = count($ValidationErrors);
 
