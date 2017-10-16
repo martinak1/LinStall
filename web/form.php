@@ -154,7 +154,7 @@ $favDistro
   //Multi-select using contents of text file with Options...
   $TheForm .= "
         <div class=\"Col-4\">
-          <label for=\"languages\" class=\"WideLabel\">Favorite Programming Language?<br />
+          <label class=\"col-sm-2 form-control\" for=\"languages\" class=\"WideLabel\">Programming Languages known?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
           <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
 
@@ -174,7 +174,7 @@ $favDistro
   $TheForm .= " </fieldset>\n";
   return $TheForm;
 }
-//
+
 //Mainline 
 //Set if initially $PoppedUp or not, then track it, used to control Close Window button
 if (!isset($_REQUEST['View'])) {
@@ -184,6 +184,7 @@ else {
   $View = $_REQUEST['View'];
 }
 
+// first time viewing today
 if ($View == 'First') {
   //This is their first time at the page, explain stuff and make the form with empty $_POST...
   $UI = "  <h2>LinStall Forum Signup</h2>
@@ -196,6 +197,7 @@ if ($View == 'First') {
      <p>Click <a href=\"#\" onClick=\"PopupAbout()\">About the Form</a> to pop up notes about the form, JavaScript, and PHP.</p>
 </form>";
 } 
+// submitting the form
 elseif ($View == 'Submit Form') {
   //They've filled in the form and clicked the Submit button, should be error free unless they've disabled JavaScript
   //on their browser or the content is submitted by a bot.  
@@ -233,12 +235,15 @@ elseif ($View == 'Submit Form') {
 
   // favorite distro
   if (!isset($favDistro) or $favDistro== '') $ValidationErrors['favDistro'] = "Please select the distro you like the most.";
+
+  // don't know what this is
   if (!isset($MASEStateFavorite) or $MASEStateFavorite  == '') $ValidationErrors['MASEStateFavorite'] = "You must select your favorite Southeastern state to have your application considered.";
 
   // password
-  if ((!isset($pass11) or $pass11  == '') or (!isset($pass12) or $pass12  == '')) {
+  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) {
     $ValidationErrors['pass1'] = "Enter your password twice, please.";
-  } elseif ($pass11 != $pass12) {
+  }
+  elseif ($pass1 != $pass1) {
     $ValidationErrors['pass1'] = "Passwords do not match.";
   }
 
@@ -246,17 +251,21 @@ elseif ($View == 'Submit Form') {
   $UI = '';
   if (is_array($ValidationErrors)) {
     $ErrorCount = count($ValidationErrors);
+
     if ($ErrorCount == 1) {
       $UI .= "<p>Please correct this error, then click Submit Form:</p>\n";
-    } else {
+    }
+    else {
       $UI .= "<p>Please correct $ErrorCount errors, then click Submit Form:</p>\n";
     }
+
     $UI .= "<ul>\n";
     foreach ($ValidationErrors as $AnErrorMessage) {
       $UI .= "   <li>$AnErrorMessage</li>\n ";
     }
     $UI .= "</ul>\n";
-  } else {
+  } 
+  else {
     $UI .= "<p>Your form appears correct and would have been applied to the database
     if we felt like it.  You're welcome to make any corrections that might be 
     needed click Submit Form...</p>";
@@ -269,11 +278,12 @@ elseif ($View == 'Submit Form') {
   // append the js validator
   $UI .= MakeTheForm($ValidationErrors);
   $UI .= " <p>Run JS ValidateForm: <input type=\"checkbox\" name=\"RunJS\" id=\"RunJS\" checked=\"checked\">  Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> if changes have been made.  </p>
-     <p>Click <a href=\"#\" onClick=\"PopupAbout()\">About the Form</a> to pop up notes about the form, JavaScript, and PHP.</p>
- </form>";
+ </form>\n";
   $UI .= "<p>Use your browser's 'back button' or Alt + Left Arrow to return to the previous page...</p>";
-  }
-} else {
+  
+} 
+// error figuring out the view
+else {
   $UI = "<p><font color=red>! </font>Somehow we don't know what your next view should be '$View' is not valid...</p>";
 }
 
@@ -282,4 +292,5 @@ $FormTemplate = file_get_contents('template.html');
 $FormTemplate = str_replace('[[[DynamicContent]]]', $UI, $FormTemplate);
 echo $FormTemplate;
 exit;
+
 ?>
