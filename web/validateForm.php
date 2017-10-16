@@ -17,144 +17,157 @@ function MakeTheForm($ValidationErrors) {
     $pass1      = '';
     $pass2      = '';
     $linuxLove  = '';
+    $favDistro  = '';
+    $distroUsed = '';
+    $hatedDist  = '';
+    $bio        = '';
   }
 
   // error symbol 
   $RedSplat = " <span class=\"Flag\">* </span> ";
 
-  $TheForm = "<h2>Create an account and talk to other Linux enthusiest!</h2>
-    <fieldset>
-      <legend>Name &amp; Contact Data</legend>\n";
-
-  if (isset($ValidationErrors['fName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-  $TheForm .= "      <p><label for=\"fName\">$SplatSlug First Name:</label>
-          <input type=\"text\" name=\"fName\" id=\"fName\" value=\"$fName\"/></p><br /> \n";
-
-  if (isset($ValidationErrors['email'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-  $TheForm .= "       <p><label for=\"email\">$SplatSlug Email:</label>
-          <input type=\"text\" name=\"email\" id=\"email\" value=\"$email\"/></p><br />  \n";
-
-  if (isset($ValidationErrors['uName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-  $TheForm .= "      <p><label for=\"MASMS\">$SplatSlug Username:</label>
-          <input type=\"text\" name=\"MASMS\" id=\"MASMS\" value=\"$uname\"/>
-          </p>  <br />   \n";
-
-  if (isset($ValidationErrors['pass1'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-  $TheForm .= "      
-          <p><label for=\"pass1\">$SplatSlug Password:</label>
-          <input type=\"text\" name=\"pass1\" id=\"pass1\" value=\"$pass11\"/>
-        </p><br /> \n";
-  $TheForm .= "      
-          <p><label for=\"pass2\">Password, again:</label>
-          <input type=\"text\" name=\"pass2\" id=\"pass2\" value=\"$pass2\"/>
-        </p><br /> \n";
-  $TheForm .= "        
-   </fieldset>\n";
-  $TheForm .= "   <fieldset><legend>Southeastern States Visited</legend>\n";
+  $TheForm = "<h2>Create an account and talk to other Linux enthusiest!</h2>";
   
+    // first name
+    if (isset($ValidationErrors['fName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"fName\">$SplatSlug First Name:</label>
+            <input class=\"form-control\" type=\"text\" name=\"fName\" id=\"fName\" value=\"$fName\"/></p><br /> \n";
+  
+    // last name
+    if (isset($ValidationErrors['lName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"lName\">$SplatSlug Last Name:</label>
+            <input class=\"form-control\" type=\"text\" name=\"lName\" id=\"lName\" value=\"$lName\"/></p><br /> \n";
+  
+    // email
+    if (isset($ValidationErrors['email'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "       <p><label class=\"col-sm-2 control-label\" for=\"email\">$SplatSlug Email:</label>
+            <input class=\"form-control\" type=\"text\" name=\"email\" id=\"email\" value=\"$email\"/></p><br />  \n";
+  
+    // username
+    if (isset($ValidationErrors['uName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"uName\">$SplatSlug Username:</label>
+            <input class=\"form-control\" type=\"text\" name=\"uName\" id=\"uName\" value=\"$uName\"/>
+            </p>  <br />   \n";
+  
+    // password
+    if (isset($ValidationErrors['pass1'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      
+            <p><label class=\"col-sm-2 control-label\" for=\"pass1\">$SplatSlug Password:</label>
+            <input class=\"form-control\" type=\"text\" name=\"pass1\" id=\"pass1\" value=\"$pass1\"/>
+          </p><br /> \n";
+    $TheForm .= "      
+            <p><label class=\"col-sm-2 control-label\" for=\"pass2\">Password, again:</label>
+            <input class=\"form-control\" type=\"text\" name=\"pass2\" id=\"pass2\" value=\"$pass2\"/>
+          </p><br /> \n";
 
-// end of first field
+    // street
+    if (isset($ValidationErrors['street'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"street\">$SplatSlug Street:</label>
+            <input class=\"form-control\" type=\"text\" name=\"street\" id=\"street\" value=\"$street\"/>
+            </p>  <br />   \n";
+            
+    // city
+    if (isset($ValidationErrors['city'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"city\">$SplatSlug City:</label>
+            <input class=\"form-control\" type=\"text\" name=\"city\" id=\"city\" value=\"$city\"/>
+            </p>  <br />   \n";
 
+    // state
+    if (isset($ValidationErrors['state'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"uName\">$SplatSlug State:</label>
+            <input class=\"form-control\" type=\"text\" name=\"state\" id=\"state\" value=\"$state\"/>
+            </p>  <br />   \n";
+    
+    // zip 
+    if (isset($ValidationErrors['zip'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"zip\">$SplatSlug Zip:</label>
+            <input class=\"form-control\" type=\"text\" name=\"zip\" id=\"zip\" value=\"$zip\"/>
+            </p>  <br />   \n";
 
+  // distros used and favorite distro
+  $distroFile = fopen('../distros.txt','r');
 
-  //Make check boxes for MASEStatesVisited[] and radio buttons for FavSEState from file StatesSE
-  $StatesSEFile = fopen('/home/SeSDoC/OptionsStatesSE','r');
+  $favDistro= '';
 
-  $FavStateRB = '';
+  while ($distro = fgets($distroFile)) {
 
-  while ($AState = fgets($StatesSEFile)) {
-    $AState = trim($AState);
-    $AStateNoSpaces = str_replace(' ','',$AState);  //Used to make id with no spaces so extract() will work 
+    $distro= trim($distro);
+    
+    //Used to make id with no spaces so extract() will work 
+    $distroNoSpaces = str_replace(' ','',$distro);  
 
-    if (isset($MASEStatesVisited) and $MASEStatesVisited != '' and in_array($AState, $MASEStatesVisited)) {
+    if (isset($distrosUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
     } else {
       $CheckedSlug = '';
     }
-    $TheForm .= "       <label for=\"Visited$AStateNoSpaces\" class=\"WideLabel\">
-         <input type=\"checkbox\" name=\"MASEStatesVisited[]\" id=\"Visited$AStateNoSpaces\" value=\"$AState\" $CheckedSlug />$AState
+    $TheForm .= "       <label for=\"Visited$distroNoSpaces\" class=\"WideLabel\">
+         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$AStateNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>\n";
-    if (isset($MASEStateFavorite) and $AState == $MASEStateFavorite) {
+    if (isset($favDistro) and $distro == $favDistro) {
       $CheckedSlug = 'checked';
     } else {
       $CheckedSlug = '';
     }
-    $FavStateRB .= "       <label for=\"Fav$AStateNoSpaces\" class=\"WideLabel\">
-         <input type=\"radio\" name=\"MASEStateFavorite\" id=\"Fav$AStateNoSpaces\" value=\"$AState\" $CheckedSlug />$AState
+    $favDistro.= "       <label for=\"Fav$distro\" class=\"WideLabel\">
+         <input type=\"radio\" name=\"favDistro\" id=\"Fav$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>";
   }
   $TheForm .= "    </fieldset>
-    <fieldset><legend>Favorite Southeastern State</legend>
-$FavStateRB
+    <fieldset><legend>Tell us about yourself!</legend>
+$favDistro
     </fieldset>";
 
   $TheForm .= "
     <fieldset>
-      <legend>Opinions</legend>
+      <legend>About You</legend>
       <div class=\"Row\">\n";
-  if (isset($ValidationErrors['MAOpinion'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+
+  if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "   <div class=\"Col-12\">       
-          <label for=\"MAOpinion\" class=\"WideLabel\">$SplatSlug What's your opinion of the Southeast?</label>      
-            <textarea name=\"MAOpinion\" id=\"MAOpinion\" placeholder=\"Your opinion is very important to us as we consider your application...\">$MAOpinion</textarea>
+          <label for=\"bio\" class=\"WideLabel\">$SplatSlug Bio: </label>      
+            <textarea name=\"bio\" id=\"bio\">$bio</textarea>
         </div>
         </div>
       <div class=\"Row\"><br />";
+
   //Hard coded small select           
-  if (isset($ValidationErrors['MALeastFavoriteWeather'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+  if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
         <div class=\"Col-4\">
-           <label for=\"MALeastFavoriteWeather\" class=\"WideLabel\">$SplatSlug Least Favorite Southeastern Weather?</label>
-           <select name=\"MALeastFavoriteWeather\" id=\"MALeastFavoriteWeather\" size=\"5\">
+           <label class=\"col-sm-2 control-label\" for=\"hatedDist\" class=\"WideLabel\">$SplatSlug Most hated distro?</label>
+           <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
-  if ($MALeastFavoriteWeather == 'Heat') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "            <option value=\"Heat\" $SelectedSlug>Heat</option>\n";
-  if ($MALeastFavoriteWeather == 'Humidity') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "             <option value=\"Humidity\" $SelectedSlug>Humidity</option>\n";
-  if ($MALeastFavoriteWeather == 'Thunder') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "             <option value=\"Thunder\" $SelectedSlug>Thunder</option>\n";
-  if ($MALeastFavoriteWeather == 'Rain') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "             <option value=\"Rain\" $SelectedSlug>Rain</option>\n";
-  if ($MALeastFavoriteWeather == 'Snow') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "             <option value=\"Snow\" $SelectedSlug>Snow</option>";
+  if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  $TheForm .= "            <option value=\"fedora\" $SelectedSlug>Fedora</option>\n";
+  if ($MALeastFavoriteWeather == 'Debian') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  $TheForm .= "             <option value=\"Debian\" $SelectedSlug>Debian</option>\n";
+  if ($MALeastFavoriteWeather == 'Arch') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  $TheForm .= "             <option value=\"Arch\" $SelectedSlug>Arch</option>\n";
+  if ($MALeastFavoriteWeather == 'Ubuntu') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  $TheForm .= "             <option value=\"Ubuntu\" $SelectedSlug>Ubuntu</option>\n";
+  if ($MALeastFavoriteWeather == 'Suse') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  $TheForm .= "             <option value=\"Suse\" $SelectedSlug>Suse</option>";
   $TheForm .= "
            </select>
-        </div>\n";
-  //Another hard coded single select with background-color           
-  if (isset($ValidationErrors['MAColor'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-  $TheForm .= "
-        <div class=\"Col-4\">\n           <label for=\"MAColor\" class=\"WideLabel\">$SplatSlug Favorite Color of Southeastern Rainbows?</label>
-             <select name=\"MAColor\" id=\"MAColor\" size=\"7\">\n";
-  if (!isset($MAColor)) $MAColor = '';
-  if ($MAColor == 'Red') { $SelectedSlug = "selected "; } else { $SelectedSlug = ''; }
-  $TheForm .= "              <option value=\"Red\" style=\"background-color: red;\" $SelectedSlug>Red</option>\n";
-  if ($MAColor == 'Orange') { $SelectedSlug = "selected "; } else { $SelectedSlug = ''; }
-  $TheForm .= "              <option value=\"Orange\" style=\"background-color: orange;\" $SelectedSlug>Orange</option>\n";
-  if ($MAColor == 'Yellow') { $SelectedSlug = "selected "; } else { $SelectedSlug = ''; }
-  $TheForm .= "              <option value=\"Yellow\" style=\"background-color: yellow;\" $SelectedSlug>Yellow</option>\n";
-  if ($MAColor == 'Green') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "              <option value=\"Green\" style=\"background-color: green;\"  $SelectedSlug>Green</option>\n";
-  if ($MAColor == 'Blue') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "              <option value=\"Blue\" style=\"color:white; background-color: blue;\"  $SelectedSlug>Blue</option>\n";
-  if ($MAColor == 'Indigo') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "              <option value=\"indigo\" style=\"color:white; background-color: indigo;\"  $SelectedSlug>Indigo</option>\n";
-  if ($MAColor == 'Violet') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
-  $TheForm .= "              <option value=\"violet\" style=\"background-color: violet;\"  $SelectedSlug>Violet</option>
-            </select>
         </div>\n";
 
   //Multi-select using contents of text file with Options...
   $TheForm .= "
         <div class=\"Col-4\">
-          <label for=\"MAOtherStates\" class=\"WideLabel\">Favorite Other States?<br />
+          <label for=\"languages\" class=\"WideLabel\">Favorite Programming Language?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
-          <select name=\"MAOtherStatesVisited[]\" id=\"MAOtherStatesVisited\" size=\"12\" multiple>\n";
-  $StatesNotSEFile = fopen('/home/SeSDoC/OptionsStatesNotSE','r');
-  while ($AState = fgets($StatesNotSEFile)) {
-    $AState = trim($AState);
-    //$AStateNoSpaces = str_replace(' ','',$AState);
+          <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
+
+  $languageFile = fopen('../languages','r');
+
+  while ($language = fgets($languageFile)) {
+    $language = trim($language);
+
     if (isset($MAOtherStatesVisited) and $MAOtherStatesVisited != '' and in_array($AState, $MAOtherStatesVisited)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
     $TheForm .= "             <option value=\"$AState\" $SelectedSlug >$AState</option>\n";
   }
+
   $TheForm .= "          </select>
         </div>\n";
 
@@ -165,29 +178,32 @@ $FavStateRB
 //
 //Mainline 
 //Set if initially $PoppedUp or not, then track it, used to control Close Window button
-$PoppedUp = isset($_REQUEST['PoppedUp']);
 if (!isset($_REQUEST['View'])) {
   $View = 'First';
-} else {
+} 
+else {
   $View = $_REQUEST['View'];
 }
+
 if ($View == 'First') {
   //This is their first time at the page, explain stuff and make the form with empty $_POST...
-  $UI = "  <h2>SeSDoC Membership Application</h2>
-   <p>Click <a href=\"#\" onClick=\"PopupAbout()\">About the Form</a> to pop up notes about the form, JavaScript, and PHP.</p>
+  $UI = "  <h2>LinStall Forum Signup</h2>
    <form method=\"POST\" name=\"SeSDoCForm\" action=\"SeSDoCForm.php\" onSubmit=\"return ValidateForm();\">";
-  if ($PoppedUp) $UI .= "\n<input type=\"hidden\" name=\"PoppedUp\" value=\"Yep\">\n";
+
   $UI .= MakeTheForm('');
   $UI .= " 
      <p>Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> to submit your completed form to SeSDoC.  </p>
      <p>Uncheck the box to disable JS ValidateForm: <input type=\"checkbox\" name=\"RunJS\" id=\"RunJS\" checked=\"checked\"></p>
      <p>Click <a href=\"#\" onClick=\"PopupAbout()\">About the Form</a> to pop up notes about the form, JavaScript, and PHP.</p>
 </form>";
-} elseif ($View == 'Submit Form') {
+} 
+elseif ($View == 'Submit Form') {
   //They've filled in the form and clicked the Submit button, should be error free unless they've disabled JavaScript
   //on their browser or the content is submitted by a bot.  
+
   $ValidationErrors = '';
   extract($_POST);
+
   //Validate what came back.
   if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Name is missing or empty.  Please enter your name before clicking Submit.";
   if (!isset($email) or $email == '') {
@@ -208,6 +224,7 @@ if ($View == 'First') {
   } elseif ($pass11 != $pass12) {
     $ValidationErrors['pass1'] = "Passwords do not match.";
   }
+
   //$CountSEStates
   $UI = '';
   if (is_array($ValidationErrors)) {
@@ -241,9 +258,8 @@ if ($View == 'First') {
 } else {
   $UI = "<p><font color=red>! </font>Somehow we don't know what your next view should be '$View' is not valid...</p>";
 }
-$FormTemplate = file_get_contents('TemplateSeSDoCForm.html');
+$FormTemplate = file_get_contents('template.html');
 $FormTemplate = str_replace('[[[TheForm]]]', $UI, $FormTemplate);
 echo $FormTemplate;
 exit;
 ?>
-~        
