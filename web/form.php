@@ -26,7 +26,7 @@ function MakeTheForm($ValidationErrors) {
   // error symbol 
   $RedSplat = " <span class=\"Flag\">* </span> ";
 
-  $TheForm = "<h3>Create an account and talk to other Linux enthusiests!</h3>";
+  $TheForm = "<h2>Create an account and talk to other Linux enthusiest!</h2>";
   
     // first name
     if (isset($ValidationErrors['fName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
@@ -84,8 +84,11 @@ function MakeTheForm($ValidationErrors) {
             <input class=\"form-control\" type=\"text\" name=\"zip\" id=\"zip\" value=\"$zip\"/>
             </p>  <br />   \n";
 
-  $TheForm .= "        </fieldset>
-      <fieldset><legend>Tell us about yourself!</legend>\n";
+
+  $TheForm .= "    </fieldset>
+    <fieldset><legend>Tell us about yourself!</legend>
+$favDistro
+    </fieldset>";
 
   // distros used and favorite distro
   $distroFile = fopen('../distros','r');
@@ -101,12 +104,11 @@ function MakeTheForm($ValidationErrors) {
 
     if (isset($distrosUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
-    } 
-    else {
+    } else {
       $CheckedSlug = '';
     }
-    $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"WideLabel\">
-         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
+    $TheForm .= "       <label for=\"Visited$distroNoSpaces\" class=\"WideLabel\">
+         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$AStateNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>\n";
     if (isset($favDistro) and $distro == $favDistro) {
       $CheckedSlug = 'checked';
@@ -117,8 +119,6 @@ function MakeTheForm($ValidationErrors) {
          <input type=\"radio\" name=\"favDistro\" id=\"Fav$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>";
   }
-$favDistro
-    </fieldset>";
 
   $TheForm .= "
     <fieldset>
@@ -139,15 +139,15 @@ $favDistro
            <label class=\"col-sm-2 control-label\" for=\"hatedDist\" class=\"WideLabel\">$SplatSlug Most hated distro?</label>
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
-  if ($hatedDist == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "            <option value=\"fedora\" $SelectedSlug>Fedora</option>\n";
-  if ($hatedDist == 'Debian') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($MALeastFavoriteWeather == 'Debian') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Debian\" $SelectedSlug>Debian</option>\n";
-  if ($hatedDist == 'Arch') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($MALeastFavoriteWeather == 'Arch') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Arch\" $SelectedSlug>Arch</option>\n";
-  if ($hatedDist == 'Ubuntu') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($MALeastFavoriteWeather == 'Ubuntu') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Ubuntu\" $SelectedSlug>Ubuntu</option>\n";
-  if ($hatedDist == 'SuSE') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($MALeastFavoriteWeather == 'Suse') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Suse\" $SelectedSlug>Suse</option>";
   $TheForm .= "
            </select>
@@ -165,8 +165,8 @@ $favDistro
   while ($language = fgets($languageFile)) {
     $language = trim($language);
 
-    if (isset($language) and $language != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
-    $TheForm .= "             <option value=\"$language\" $SelectedSlug >$language</option>\n";
+    if (isset($MAOtherStatesVisited) and $MAOtherStatesVisited != '' and in_array($AState, $MAOtherStatesVisited)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    $TheForm .= "             <option value=\"$AState\" $SelectedSlug >$AState</option>\n";
   }
 
   $TheForm .= "          </select>
@@ -190,11 +190,11 @@ else {
 if ($View == 'First') {
   //This is their first time at the page, explain stuff and make the form with empty $_POST...
   $UI = "  <h2>LinStall Forum Signup</h2>
-   <form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">";
+   <form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
 
   $UI .= MakeTheForm('');
   $UI .= " 
-     <p>Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> to submit your completed form to SeSDoC.  </p>
+     <p>Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> to submit your completed form to LinStall.  </p>
      <p>Uncheck the box to disable JS ValidateForm: <input type=\"checkbox\" name=\"RunJS\" id=\"RunJS\" checked=\"checked\"></p>
      <p>Click <a href=\"#\" onClick=\"PopupAbout()\">About the Form</a> to pop up notes about the form, JavaScript, and PHP.</p>
 </form>";
@@ -239,7 +239,7 @@ elseif ($View == 'Submit Form') {
   if (!isset($favDistro) or $favDistro== '') $ValidationErrors['favDistro'] = "Please select the distro you like the most.";
 
   // don't know what this is
-  //if (!isset($MASEStateFavorite) or $MASEStateFavorite  == '') $ValidationErrors['MASEStateFavorite'] = "You must select your favorite Southeastern state to have your application considered.";
+  if (!isset($MASEStateFavorite) or $MASEStateFavorite  == '') $ValidationErrors['MASEStateFavorite'] = "You must select your favorite Southeastern state to have your application considered.";
 
   // password
   if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) {
@@ -251,7 +251,6 @@ elseif ($View == 'Submit Form') {
 
   // error output
   $UI = '';
-
   if (is_array($ValidationErrors)) {
     $ErrorCount = count($ValidationErrors);
 
@@ -276,7 +275,7 @@ elseif ($View == 'Submit Form') {
 
   // build form tags
   $UI .= "<form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
-  $UI .= "<h2>LinStall Membership Application</h2>\n";
+  $UI .= "<h2>SeSDoC Membership Application</h2>\n";
 
   // append the js validator
   $UI .= MakeTheForm($ValidationErrors);
