@@ -120,7 +120,6 @@ $favDistro
 
   $TheForm .= "
     <fieldset>
-      <legend>About You</legend>
       <div class=\"Row\">\n";
 
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
