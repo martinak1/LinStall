@@ -188,7 +188,7 @@ else {
 if ($View == 'First') {
   //This is their first time at the page, explain stuff and make the form with empty $_POST...
   $UI = "  <h2>LinStall Forum Signup</h2>
-   <form method=\"POST\" name=\"SeSDoCForm\" action=\"SeSDoCForm.php\" onSubmit=\"return ValidateForm();\">";
+   <form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">";
 
   $UI .= MakeTheForm('');
   $UI .= " 
