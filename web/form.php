@@ -1,10 +1,13 @@
 <?php
 
-function MakeTheForm($ValidationErrors) {
-  if (isset($_POST['fName'])) {
+function MakeTheForm($ValidationErrors) 
+{
+  if (isset($_POST['fName'])) 
+  {
     extract($_POST);
   } 
-  else {
+  else 
+  {
     //Set defaults
     $fName      = '';
     $lName      = '';
@@ -127,7 +130,7 @@ function MakeTheForm($ValidationErrors) {
             <label for=\"favDistro\" class=\" wide-label\">Favorite Distro</label>\n
             <div class=\"form-control\">";
 
-  // build check boxes
+  // build favDistro check boxes
   while ($distro = fgets($distroFile)) 
   {
 
@@ -153,9 +156,12 @@ function MakeTheForm($ValidationErrors) {
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
 
-  $TheForm .= "   <div class=\"Col-12 container justify-content-center\">       
+  $TheForm .= "   <div class=\"Col-12 justify-content-center\">       
           <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio: </label>      
+          <br>
+          <div class=\"form-control\">
             <textarea name=\"bio\" id=\"bio\">$bio</textarea>
+          </div>
         </div>
       <div class=\"container\"><br />";
 
@@ -274,7 +280,8 @@ elseif ($View == 'Submit Form') {
   if (!isset($hatedDist) or $hatedDist == '') $ValidationErrors['hatedDist'] = "You must select your least favorite distro.";
 
   // password
-  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) {
+  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) 
+  {
     $ValidationErrors['pass1'] = "Enter your password twice, please.";
   }
   elseif ($pass1 != $pass1) {
