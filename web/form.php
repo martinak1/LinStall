@@ -329,8 +329,8 @@ elseif ($View == 'Submit Form') {
  </form>\n";
   
 } 
-// error figuring out the view
 else {
+// error figuring out the view
   $UI = "<p>Somehow we don't know what your next view should be '$View' is not valid...</p>";
 }
 
