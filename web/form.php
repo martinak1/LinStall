@@ -105,7 +105,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<p><input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro </p>";
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro";
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
@@ -121,8 +121,9 @@ function MakeTheForm($ValidationErrors) {
   // BROKEN
   // favorite distro label
   $TheForm .= "\n</div\n><br>
-          <div class=\"contrainer justify-content-center\">
-            <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro</label>\n";
+          <div class=\"contrainer justify-content-center\">\n
+            <label for=\"favDistro\" class=\" wide-label\">Favorite Distro</label>\n
+            <div class=\"form-control\">";
 
   // build check boxes
   while ($distro = fgets($distroFile)) 
@@ -133,7 +134,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<p><input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro </p>";
+    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro";
 
     if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) 
     {
@@ -145,7 +146,7 @@ function MakeTheForm($ValidationErrors) {
     }
   }
 
-  $TheForm .= "    </div><br><br>\n";
+  $TheForm .= "    </div></div><br><br>\n";
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
