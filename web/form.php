@@ -120,9 +120,9 @@ function MakeTheForm($ValidationErrors) {
   $distroFile = fopen('../distros','r');
   // BROKEN
   // favorite distro label
-  $favDistro .= "</div><br>
+  $favDistro .= "\n</div\n><br>
           <div class=\"contrainer justify-content-center\">
-          <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro\n";
+            <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro</label>\n";
 
   // build check boxes
   while ($distro = fgets($distroFile)) 
@@ -165,13 +165,13 @@ function MakeTheForm($ValidationErrors) {
  ";
   if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "            <option value=\"fedora\" $SelectedSlug>Fedora</option>\n";
-  if ($MALeastFavoriteWeather == 'Debian') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($hatedDist == 'Debian') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Debian\" $SelectedSlug>Debian</option>\n";
-  if ($MALeastFavoriteWeather == 'Arch') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($hatedDist == 'Arch') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Arch\" $SelectedSlug>Arch</option>\n";
-  if ($MALeastFavoriteWeather == 'Ubuntu') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($hatedDist == 'Ubuntu') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Ubuntu\" $SelectedSlug>Ubuntu</option>\n";
-  if ($MALeastFavoriteWeather == 'Suse') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($hatedDist == 'Suse') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Suse\" $SelectedSlug>Suse</option>";
   $TheForm .= "
            </select>
@@ -180,7 +180,7 @@ function MakeTheForm($ValidationErrors) {
   //Multi-select using contents of text file with Options...
   $TheForm .= "
         <div class=\"Col-4 justify-content-center\">
-          <label class=\"wide-label form-control\" for=\"languages\">Programming Languages known?<br />
+          <label class=\"wide-label\" for=\"languages\">Programming Languages known?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
           <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
 
@@ -217,7 +217,6 @@ else
 // first time viewing today
 if ($View == 'First') 
 {
-  //This is their first time at the page, explain stuff and make the form with empty $_POST...
   $UI = "  <h2>LinStall Forum Signup</h2>
    <form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
 
