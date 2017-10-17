@@ -23,11 +23,12 @@ function ValidateForm()
   // last name
   if (document.signup.lName.value == '') 
   {
+    // second test spot
+    alert(ValidationErrors);
     ValidationErrors += 'Last name is required!' + Crlf;
   }
     
-  // second test spot
-  alert(ValidationErrors);
+  // alert failed here
 
   // email
   if (document.signup.email.value == '') 
