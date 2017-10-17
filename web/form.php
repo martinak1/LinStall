@@ -191,7 +191,7 @@ function MakeTheForm($ValidationErrors)
   //Multi-select using contents of text file with Options...
   $TheForm .= "
         <div class=\"Col-4 justify-content-center\">
-          <label class=\"wide-label\" for=\"languages\">Programming Languages known?<br />
+          <label class=\"sm-col-4\" for=\"languages\">Programming Languages known?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
           <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
 

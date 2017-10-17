@@ -1,10 +1,13 @@
 <?php
 
-function MakeTheForm($ValidationErrors) {
-  if (isset($_POST['fName'])) {
+function MakeTheForm($ValidationErrors) 
+{
+  if (isset($_POST['fName'])) 
+  {
     extract($_POST);
   } 
-  else {
+  else 
+  {
     //Set defaults
     $fName      = '';
     $lName      = '';
@@ -93,8 +96,9 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <div class=\"container control-label\">
-          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label><br>\n";
+  $TheForm .= "       <div class=\"justify-content-center\">
+          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n
+          <div class=\"form-control\">";
 
   // build check boxes
   while ($distro = fgets($distroFile)) 
@@ -109,7 +113,7 @@ function MakeTheForm($ValidationErrors) {
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
-      $CheckedSlug = 'checked';
+      $CheckedSlug = '@';
     } 
     else 
     {
@@ -117,14 +121,16 @@ function MakeTheForm($ValidationErrors) {
     }
   }
   
+  // reopen file for parsing 
   $distroFile = fopen('../distros','r');
-  // BROKEN
-  // favorite distro label
-  $favDistro .= "\n</div\n><br>
-          <div class=\"contrainer justify-content-center\">
-            <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro</label>\n";
 
-  // build check boxes
+  // favorite distro label
+  $TheForm .= "\n</div>\n</div\n><br>
+          <div class=\"justify-content-center\">\n
+            <label for=\"favDistro\" class=\" wide-label\">Favorite Distro</label>\n
+            <div class=\"form-control\">";
+
+  // build favDistro check boxes
   while ($distro = fgets($distroFile)) 
   {
 
@@ -145,22 +151,26 @@ function MakeTheForm($ValidationErrors) {
     }
   }
 
-  $TheForm .= "    </div><br><br>\n";
+  $TheForm .= "    </div></div><br><br>\n";
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
 
-  $TheForm .= "   <div class=\"Col-12 container justify-content-center\">       
-          <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio: </label>      
+  $TheForm .= "   <div class=\"justify-content-center\">       
+          <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio</label>      
+          <br>
+          <div class=\"form-control\">
             <textarea name=\"bio\" id=\"bio\">$bio</textarea>
+          </div>
         </div>
       <div class=\"container\"><br />";
 
   //Hard coded small select for most hated distro
   if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
-        <div class=\"Col-4 container justify-content-center\">
+        <div class=\"Col-4 justify-content-center\">
            <label for=\"hatedDist\" class=\"WideLabel control-label\">$SplatSlug Most hated distro?</label>
+           <div class=\"form-control\">
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
   if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
@@ -175,6 +185,7 @@ function MakeTheForm($ValidationErrors) {
   $TheForm .= "             <option value=\"Suse\" $SelectedSlug>Suse</option>";
   $TheForm .= "
            </select>
+           </div>
         </div>\n";
 
   //Multi-select using contents of text file with Options...
@@ -271,7 +282,8 @@ elseif ($View == 'Submit Form') {
   if (!isset($hatedDist) or $hatedDist == '') $ValidationErrors['hatedDist'] = "You must select your least favorite distro.";
 
   // password
-  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) {
+  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) 
+  {
     $ValidationErrors['pass1'] = "Enter your password twice, please.";
   }
   elseif ($pass1 != $pass1) {
