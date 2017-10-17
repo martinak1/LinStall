@@ -87,7 +87,7 @@ function MakeTheForm($ValidationErrors) {
 
   $TheForm .= "    </fieldset>
     <fieldset><legend>Tell us about yourself!</legend>
-    </fieldset>";
+    </fieldset><br><br>";
 
   // distros used and favorite distro
   $distroFile = fopen('../distros','r');
@@ -107,16 +107,16 @@ function MakeTheForm($ValidationErrors) {
     } else {
       $CheckedSlug = '';
     }
-    $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"WideLabel\">What distros have you used?<br>
+    $TheForm .= "       <div class = \"container justify-content-between\"><label for=\"used$distroNoSpaces\" class=\"WideLabel\">What distros have you used?<br>
          <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distrosUsed\" value=\"$distro\" $CheckedSlug />$distro
-       </label>\n";
+       </label></div>\n";
 
     if (isset($favDistro) and $distro == $favDistro) {
       $CheckedSlug = 'checked';
     } else {
       $CheckedSlug = '';
     }
-    $favDistro .= "       <label for=\"Fav$distro\" class=\"WideLabel\">
+    $favDistro .= "       <label for=\"Fav$distro\" class=\"WideLabel\">Favorite Distro
          <input type=\"radio\" name=\"favDistro\" id=\"Fav$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
        </label>";
   }
