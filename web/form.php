@@ -140,6 +140,7 @@ function MakeTheForm($ValidationErrors) {
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+
   $TheForm .= "   <div class=\"Col-12 container justify-content-center\">       
           <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio: </label>      
             <textarea name=\"bio\" id=\"bio\">$bio</textarea>
@@ -183,7 +184,8 @@ function MakeTheForm($ValidationErrors) {
     $language = trim($language);
 
     if (isset($language) and $language != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
-    $TheForm .= "             <option value=\"$language\" $SelectedSlug $language</option>\n";
+
+    $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
   }
 
   $TheForm .= "          </select>
