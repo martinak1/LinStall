@@ -93,7 +93,7 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"form-control wide-label\">What distros have you used?<br>\n";
+  $TheForm .= "       <label for=\"distroUsed\" class=\"form-control wide-label\">What distros have you used?</label>\n";
 
   // build check boxes
   while ($distro = fgets($distroFile)) {
@@ -103,18 +103,23 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro</label> ";
+    $TheForm .= "<input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro> ";
 
     if (isset($distrosUsed) and $distrosUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
     } else {
       $CheckedSlug = '';
     }
+  }
   
 
     // favorite distro label
-    $favDistro .= "       <label for=\"favDistro\" class=\"form-control col-sm-2\">Favorite Distro
-         <input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\" $CheckedSlug />$distro
+    $favDistro .= "       <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro</label>";
+
+  // build check boxes
+  while ($distro = fgets($distroFile)) {
+
+  $TheForm .= "      <input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\" $CheckedSlug />$distro
        </label>";
 
     if (isset($favDistro) and $distro == $favDistro) {
@@ -129,8 +134,8 @@ function MakeTheForm($ValidationErrors) {
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-  $TheForm .= "   <div class=\"Col-12\">       
-          <label for=\"bio\" class=\"WideLabel\">$SplatSlug Bio: </label>      
+  $TheForm .= "   <div class=\"Col-12 justify-content-center\">       
+          <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio: </label>      
             <textarea name=\"bio\" id=\"bio\">$bio</textarea>
         </div>
         </div>
@@ -139,7 +144,7 @@ function MakeTheForm($ValidationErrors) {
   //Hard coded small select for most hated distro
   if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
-        <div class=\"Col-4\">
+        <div class=\"Col-4 justify-content-center\">
            <label class=\"col-sm-2 control-label\" for=\"hatedDist\" class=\"WideLabel\">$SplatSlug Most hated distro?</label>
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
@@ -159,17 +164,18 @@ function MakeTheForm($ValidationErrors) {
 
   //Multi-select using contents of text file with Options...
   $TheForm .= "
-        <div class=\"Col-4\">
-          <label class=\"col-sm-2 form-control\" for=\"languages\" class=\"WideLabel\">Programming Languages known?<br />
+        <div class=\"Col-4 justify-content-center\">
+          <label class=\"wide-label form-control\" for=\"languages\">Programming Languages known?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
           <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
 
   $languageFile = fopen('../languages','r');
 
+  // build language options
   while ($language = fgets($languageFile)) {
     $language = trim($language);
 
-    if (isset($languagesKown) and $languagesKown!= '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    if (isset($language) and $languages != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
     $TheForm .= "             <option value=\"$language\" $SelectedSlug >$language</option>\n";
   }
 
