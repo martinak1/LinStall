@@ -93,7 +93,7 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <label for=\"distroUsed\" class=\"form-control wide-label\">What distros have you used?</label>\n";
+  $TheForm .= "       <label for=\"distroUsed\" class=\"form-control wide-label\">What distros have you used?\n";
 
   // build check boxes
   while ($distro = fgets($distroFile)) {
@@ -112,19 +112,25 @@ function MakeTheForm($ValidationErrors) {
     }
   }
   
-
-    // favorite distro label
-    $favDistro .= "       <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro</label>";
+  // BROKEN
+  // favorite distro label
+  $favDistro .= "       </label>
+          <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro\n";
 
   // build check boxes
   while ($distro = fgets($distroFile)) {
 
-  $TheForm .= "      <input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\" $CheckedSlug />$distro
-       </label>";
+    $distro= trim($distro);
+    
+    //Used to make id with no spaces so extract() will work 
+    $distroNoSpaces = str_replace(' ','',$distro);  
 
-    if (isset($favDistro) and $distro == $favDistro) {
+    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro";
+
+    if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) {
       $CheckedSlug = 'checked';
-    } else {
+    } 
+    else {
       $CheckedSlug = '';
     }
   }
@@ -134,7 +140,7 @@ function MakeTheForm($ValidationErrors) {
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-  $TheForm .= "   <div class=\"Col-12 justify-content-center\">       
+  $TheForm .= "   <div class=\"Col-12 container justify-content-center\">       
           <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio: </label>      
             <textarea name=\"bio\" id=\"bio\">$bio</textarea>
         </div>
@@ -144,7 +150,7 @@ function MakeTheForm($ValidationErrors) {
   //Hard coded small select for most hated distro
   if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
-        <div class=\"Col-4 justify-content-center\">
+        <div class=\"Col-4 container justify-content-center\">
            <label class=\"col-sm-2 control-label\" for=\"hatedDist\" class=\"WideLabel\">$SplatSlug Most hated distro?</label>
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
@@ -173,10 +179,11 @@ function MakeTheForm($ValidationErrors) {
 
   // build language options
   while ($language = fgets($languageFile)) {
+
     $language = trim($language);
 
-    if (isset($language) and $languages != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
-    $TheForm .= "             <option value=\"$language\" $SelectedSlug >$language</option>\n";
+    if (isset($language) and $language != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    $TheForm .= "             <option value=\"$language\" $SelectedSlug $language</option>\n";
   }
 
   $TheForm .= "          </select>
