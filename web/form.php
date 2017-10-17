@@ -104,7 +104,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/>$CheckedSlug $distro";
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
@@ -113,9 +113,10 @@ function MakeTheForm($ValidationErrors) {
     }
   }
   
+  $distroFile = fopen('../distros','r');
   // BROKEN
   // favorite distro label
-  $favDistro .= "</div>
+  $favDistro .= "</div><br>
           <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro\n";
 
   // build check boxes
@@ -214,7 +215,6 @@ if ($View == 'First') {
   $UI .= " 
      <p>Click <input type=\"submit\" name=\"View\" value=\"Submit Form\"> to submit your completed form to LinStall.  </p>
      <p>Uncheck the box to disable JS ValidateForm: <input type=\"checkbox\" name=\"RunJS\" id=\"RunJS\" checked=\"checked\"></p>
-     <p>Click <a href=\"#\" onClick=\"PopupAbout()\">About the Form</a> to pop up notes about the form, JavaScript, and PHP.</p>
 </form>";
 } 
 // submitting the form
