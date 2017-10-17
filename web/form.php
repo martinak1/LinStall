@@ -30,57 +30,57 @@ function MakeTheForm($ValidationErrors) {
   
     // first name
     if (isset($ValidationErrors['fName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"fName\">$SplatSlug First Name:</label>
+    $TheForm .= "      <p><label class=\"col-sm-5 control-label\" for=\"fName\">$SplatSlug First Name:</label>
             <input class=\"form-control\" type=\"text\" name=\"fName\" id=\"fName\" value=\"$fName\"/></p><br /> \n";
   
     // last name
     if (isset($ValidationErrors['lName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"lName\">$SplatSlug Last Name:</label>
+    $TheForm .= "      <p><label class=\"col-sm-5 control-label\" for=\"lName\">$SplatSlug Last Name:</label>
             <input class=\"form-control\" type=\"text\" name=\"lName\" id=\"lName\" value=\"$lName\"/></p><br /> \n";
   
     // email
     if (isset($ValidationErrors['email'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "       <p><label class=\"col-sm-2 control-label\" for=\"email\">$SplatSlug Email:</label>
+    $TheForm .= "       <p><label class=\"col-sm-5 control-label\" for=\"email\">$SplatSlug Email:</label>
             <input class=\"form-control\" type=\"text\" name=\"email\" id=\"email\" value=\"$email\"/></p><br />  \n";
   
     // username
     if (isset($ValidationErrors['uName'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"uName\">$SplatSlug Username:</label>
+    $TheForm .= "      <p><label class=\"col-sm-5 control-label\" for=\"uName\">$SplatSlug Username:</label>
             <input class=\"form-control\" type=\"text\" name=\"uName\" id=\"uName\" value=\"$uName\"/>
             </p>  <br />   \n";
   
     // password
     if (isset($ValidationErrors['pass1'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
     $TheForm .= "      
-            <p><label class=\"col-sm-2 control-label\" for=\"pass1\">$SplatSlug Password:</label>
+            <p><label class=\"col-sm-5 control-label\" for=\"pass1\">$SplatSlug Password:</label>
             <input class=\"form-control\" type=\"text\" name=\"pass1\" id=\"pass1\" value=\"$pass1\"/>
           </p><br /> \n";
     $TheForm .= "      
-            <p><label class=\"col-sm-2 control-label\" for=\"pass2\">Password, again:</label>
+            <p><label class=\"col-sm-5 control-label\" for=\"pass2\">Password, again:</label>
             <input class=\"form-control\" type=\"text\" name=\"pass2\" id=\"pass2\" value=\"$pass2\"/>
           </p><br /> \n";
 
     // street
     if (isset($ValidationErrors['street'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"street\">$SplatSlug Street:</label>
+    $TheForm .= "      <p><label class=\"col-sm-5 control-label\" for=\"street\">$SplatSlug Street:</label>
             <input class=\"form-control\" type=\"text\" name=\"street\" id=\"street\" value=\"$street\"/>
             </p>  <br />   \n";
             
     // city
     if (isset($ValidationErrors['city'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"city\">$SplatSlug City:</label>
+    $TheForm .= "      <p><label class=\"col-sm-5 control-label\" for=\"city\">$SplatSlug City:</label>
             <input class=\"form-control\" type=\"text\" name=\"city\" id=\"city\" value=\"$city\"/>
             </p>  <br />   \n";
 
     // state
     if (isset($ValidationErrors['state'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"uName\">$SplatSlug State:</label>
+    $TheForm .= "      <p><label class=\"col-sm-5 control-label\" for=\"uName\">$SplatSlug State:</label>
             <input class=\"form-control\" type=\"text\" name=\"state\" id=\"state\" value=\"$state\"/>
             </p>  <br />   \n";
     
     // zip 
     if (isset($ValidationErrors['zip'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-    $TheForm .= "      <p><label class=\"col-sm-2 control-label\" for=\"zip\">$SplatSlug Zip:</label>
+    $TheForm .= "      <p><label class=\"col-sm-5 control-label\" for=\"zip\">$SplatSlug Zip:</label>
             <input class=\"form-control\" type=\"text\" name=\"zip\" id=\"zip\" value=\"$zip\"/>
             </p>  <br />   \n";
 
