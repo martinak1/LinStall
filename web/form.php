@@ -19,7 +19,6 @@ function MakeTheForm($ValidationErrors)
     $zip        = '';
     $pass1      = '';
     $pass2      = '';
-    $linuxLove  = '';
     $favDistro  = '';
     $distroUsed = '';
     $hatedDist  = '';
