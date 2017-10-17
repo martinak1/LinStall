@@ -93,7 +93,7 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <div class=\"container\">
+  $TheForm .= "       <div class=\"container justify-content-center\">
           <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label><br>\n
           <div class=\"form-control\">";
 
