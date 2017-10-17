@@ -95,6 +95,11 @@ function ValidateForm()
     ValidationErrors += 'You must enter a distro you hate!!' + CrLf;           
   }                                                                           
 
+  // languages known
+  if (document.signup.languagesKnown.value == '')                                  
+  {                                                                           
+    ValidationErrors += 'How do you expect to eat your puddin\' if you don\'t learn to code' + CrLf;           
+  }                                                                           
 
   //alert(ValidationErrors);                                                    
 
