@@ -93,8 +93,8 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <div class = \"container justify-content-between\"><label for=\"used$distroNoSpaces\" class=\"form-control col-sm-2\">What distros have you used?<br>
-         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro\"</label></div>\n";
+  $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"form-control wide-label\">What distros have you used?<br>
+         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro\"</label>\n";
 
   // build check boxes
   while ($distro = fgets($distroFile)) {
