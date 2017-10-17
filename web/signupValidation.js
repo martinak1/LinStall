@@ -18,7 +18,7 @@ function ValidateForm()
     ValidationErrors += 'First name is required!' + CrLf;
   }
   
-  alert(ValidationErrors);
+  // test alert got this far
 
   // last name
   if (document.signup.lName.value == '') 
@@ -31,6 +31,9 @@ function ValidateForm()
   {
     ValidationErrors += 'Email is required!' + CrLf;
   }
+    
+  // second test spot
+  alert(ValidationErrors);
 
   // password
   if ((document.signup.pass1.value == '') || (document.signup.pass2.value == '')) 
@@ -47,8 +50,6 @@ function ValidateForm()
   {
     ValidationErrors += 'Username is required!' + CrLf;
   }
-
-  alert("#2");
     
   // street
   if (document.signup.street.value == '') 
@@ -68,8 +69,6 @@ function ValidateForm()
     ValidationErrors += 'We want to know what state we can find you in!' + Crlf;
   }
     
-  alert("#4");
-    
   // favorite distro
   if (document.signup.favDistro.value == '')
   {
@@ -88,16 +87,12 @@ function ValidateForm()
     ValidationErrors += 'I guess you like Tux too much to hate Linux!'+ Crlf;
   }
 
-  alert("#5");
-
   // bio
   if (document.signup.bio.value == '')
   {
     ValidationErrors += 'Everyone one has a story, but summarize your\'s in 50 char or less' + Crlf;
   }
   
-  alert("I'm at the end now about to return a value");
-
   // return true if no error otherwise false
   if (ValidationErrors == '') 
   {
