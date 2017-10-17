@@ -120,7 +120,7 @@ function MakeTheForm($ValidationErrors) {
   $distroFile = fopen('../distros','r');
   // BROKEN
   // favorite distro label
-  $favDistro .= "\n</div\n><br>
+  $TheForm .= "\n</div\n><br>
           <div class=\"contrainer justify-content-center\">
             <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro</label>\n";
 
