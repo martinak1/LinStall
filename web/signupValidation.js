@@ -18,7 +18,7 @@ function ValidateForm()
     ValidationErrors += 'First name is required!' + CrLf;
   }
   
-  alert("new test alert ln: 21");
+  alert(ValidationErrors);
 
   // last name
   if (document.signup.lName.value == '') 
