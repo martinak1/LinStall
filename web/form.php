@@ -88,14 +88,15 @@ function MakeTheForm($ValidationErrors) {
   $TheForm .= "    <h3>Tell us about yourself!</h3>
     <br><br>\n";
 
-  // distros used and favorite distro
   $distroFile = fopen('../distros','r');
 
   $favDistro= '';
 
-  $TheForm .= "       <div class = \"container justify-content-between\"><label for=\"used$distroNoSpaces\" class=\"WideLabel\">What distros have you used?<br>
-         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distrosUsed\" value=\"$distro\" $CheckedSlug />$distro
-       </label></div>\n";
+  // distros used label
+  $TheForm .= "       <div class = \"container justify-content-between\"><label for=\"used$distroNoSpaces\" class=\"form-control col-sm-2\">What distros have you used?<br>
+         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro\"</label></div>\n";
+
+  // build check boxes
   while ($distro = fgets($distroFile)) {
 
     $distro= trim($distro);
@@ -110,18 +111,19 @@ function MakeTheForm($ValidationErrors) {
     }
   
 
-    // favorite distro
+    // favorite distro label
+    $favDistro .= "       <label for=\"favDistro\" class=\"form-control col-sm-2\">Favorite Distro
+         <input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\" $CheckedSlug />$distro
+       </label>";
+
     if (isset($favDistro) and $distro == $favDistro) {
       $CheckedSlug = 'checked';
     } else {
       $CheckedSlug = '';
     }
-    $favDistro .= "       <label for=\"Fav$distro\" class=\"WideLabel\">Favorite Distro
-         <input type=\"radio\" name=\"favDistro\" id=\"Fav$distroNoSpaces\" value=\"$distro\" $CheckedSlug />$distro
-       </label>";
   }
 
-  $TheForm .= "
+  $TheForm .= "    </label></div>\n
       <div class=\"Row\">\n";
 
   // add bio to the form
