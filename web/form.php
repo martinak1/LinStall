@@ -87,7 +87,7 @@ function MakeTheForm($ValidationErrors) {
 
   $TheForm .= "    </fieldset>
     <fieldset><legend>Tell us about yourself!</legend>
-    </fieldset><br><br>";
+    </fieldset><br><br>\n";
 
   // distros used and favorite distro
   $distroFile = fopen('../distros','r');
