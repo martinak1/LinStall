@@ -92,8 +92,6 @@ function MakeTheForm($ValidationErrors)
 
   $distroFile = fopen('../distros','r');
 
-  $favDistro= '';
-
   // distros used label
   $TheForm .= "       <div class=\"justify-content-center\">
           <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n
@@ -103,7 +101,7 @@ function MakeTheForm($ValidationErrors)
   while ($distro = fgets($distroFile)) 
   {
 
-    $distro= trim($distro);
+    $distro = trim($distro);
     
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
@@ -247,20 +245,23 @@ elseif ($View == 'Submit Form') {
   //Validate what came back.
 
   // first name
-  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Your first name is missing or empty. Please enter your name before clicking Submit.";
+  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Please enter your name.";
 
   // last name
-  if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Your last name is missing or empty.  Please enter your name before clicking Submit.";
+  if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Please enter your name.";
 
   // email
   if (!isset($email) or $email == '') 
   {
-    $ValidationErrors['email'] = "The email address is empty.  Please enter your email address before clicking Submit.";
+    $ValidationErrors['email'] = "Enter your email address.";
   }
   elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) 
   {
     $ValidationErrors['email'] = "The email  is not a valid format.";
   }
+
+  // username
+  if (!isset($uName) or $uName== '') $ValidationErrors['uName'] = "Please enter your desired username.";
   // street
   if (!isset($street) or $street == '') $ValidationErrors['street'] = "Please enter your street address.";
 

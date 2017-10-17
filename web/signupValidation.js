@@ -9,8 +9,6 @@ function ValidateForm()
     return true;
   }
 
-  alert("It works!");
-
   var ValidationErrors = '';
   var CrLf = "\r\n\r\n";
 
