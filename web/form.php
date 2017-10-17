@@ -260,6 +260,15 @@ elseif ($View == 'Submit Form') {
     $ValidationErrors['email'] = "The email  is not a valid format.";
   }
 
+  // password
+  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) 
+  {
+    $ValidationErrors['pass1'] = "Enter your password twice, please.";
+  }
+  elseif ($pass1 != $pass1) {
+    $ValidationErrors['pass1'] = "Passwords do not match.";
+  }
+
   // username
   if (!isset($uName) or $uName== '') $ValidationErrors['uName'] = "Please enter your desired username.";
   // street
@@ -285,15 +294,6 @@ elseif ($View == 'Submit Form') {
 
   // least favorite distro 
   if (!isset($hatedDist) or $hatedDist == '') $ValidationErrors['hatedDist'] = "You must select your least favorite distro.";
-
-  // password
-  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) 
-  {
-    $ValidationErrors['pass1'] = "Enter your password twice, please.";
-  }
-  elseif ($pass1 != $pass1) {
-    $ValidationErrors['pass1'] = "Passwords do not match.";
-  }
 
   // error output
   $UI = '';

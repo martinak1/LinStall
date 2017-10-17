@@ -17,6 +17,8 @@ function ValidateForm()
   { 
     ValidationErrors += 'First name is required!' + CrLf;
   }
+  
+  alert("new test alert ln: 21");
 
   // last name
   if (document.signup.lName.value == '') 
@@ -28,6 +30,16 @@ function ValidateForm()
   if (document.signup.email.value == '') 
   {
     ValidationErrors += 'Email is required!' + CrLf;
+  }
+
+  // password
+  if ((document.signup.pass1.value == '') || (document.signup.pass2.value == '')) 
+  {
+    ValidationErrors += 'Please enter your password, twice.' + CrLf;
+  } 
+  else if (document.signup.MAPass1.value != document.signup.MAPass2.value) 
+  {
+    ValidationErrors += 'Passwords entered are not the same.' + CrLf;
   }
 
   // uname
@@ -56,16 +68,6 @@ function ValidateForm()
     ValidationErrors += 'We want to know what state we can find you in!' + Crlf;
   }
     
-  // password
-  if ((document.signup.pass1.value == '') || (document.signup.pass2.value == '')) 
-  {
-    ValidationErrors += 'Please enter your password, twice.' + CrLf;
-  } 
-  else if (document.signup.MAPass1.value != document.signup.MAPass2.value) 
-  {
-    ValidationErrors += 'Passwords entered are not the same.' + CrLf;
-  }
-
   alert("#4");
     
   // favorite distro
