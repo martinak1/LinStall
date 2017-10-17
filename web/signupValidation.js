@@ -77,13 +77,26 @@ function ValidateForm()
     ValidationErrors += 'Zip is required!' + CrLf;                            
   }                                                                           
 
+  // used distro                                                          
+  if (document.signup.favDistro.value == '')                                  
+  {                                                                           
+    ValidationErrors += 'Your favorite distro is required!' + CrLf;           
+  }                                                                           
+
   // favorite distro                                                          
   if (document.signup.favDistro.value == '')                                  
   {                                                                           
     ValidationErrors += 'Your favorite distro is required!' + CrLf;           
   }                                                                           
 
-  alert(ValidationErrors);                                                    
+  // hated distro                                                          
+  if (document.signup.favDistro.value == '')                                  
+  {                                                                           
+    ValidationErrors += 'You must enter a distro you hate!!' + CrLf;           
+  }                                                                           
+
+
+  //alert(ValidationErrors);                                                    
 
   // return true if no error otherwise false                                  
   if (ValidationErrors == '')                                                 
