@@ -115,7 +115,6 @@ function MakeTheForm($ValidationErrors) {
     {
       $CheckedSlug = '';
     }
-  }
   
   $distroFile = fopen('../distros','r');
   // BROKEN
@@ -178,7 +177,8 @@ function MakeTheForm($ValidationErrors) {
   $languageFile = fopen('../languages','r');
 
   // build language options
-  while ($language = fgets($languageFile)) {
+  while ($language = fgets($languageFile)) 
+  {
 
     $language = trim($language);
 
@@ -191,6 +191,8 @@ function MakeTheForm($ValidationErrors) {
         </div>\n";
 
   $TheForm .= "    </div><br><br>\n\n";
+
+
   return $TheForm;
 }
 
