@@ -93,7 +93,7 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <div class=\"container justify-content-center\">
+  $TheForm .= "       <div class=\"justify-content-center\">
           <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n
           <div class=\"form-control\">";
 
@@ -123,7 +123,7 @@ function MakeTheForm($ValidationErrors) {
 
   // favorite distro label
   $TheForm .= "\n</div>\n</div\n><br>
-          <div class=\"contrainer justify-content-center\">\n
+          <div class=\"justify-content-center\">\n
             <label for=\"favDistro\" class=\" wide-label\">Favorite Distro</label>\n
             <div class=\"form-control\">";
 
