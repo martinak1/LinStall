@@ -92,6 +92,8 @@ function MakeTheForm($ValidationErrors) {
 
   $favDistro= '';
 
+  // distros used label
+  $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"form-control wide-label\">What distros have you used?<br>\n";
 
   // build check boxes
   while ($distro = fgets($distroFile)) {
@@ -101,9 +103,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    // distros used label
-   $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"form-control wide-label\">What distros have you used?<br>
-         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro</label>";
+    $TheForm .= "<input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro</label> ";
 
     if (isset($distrosUsed) and $distrosUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
