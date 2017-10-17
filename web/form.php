@@ -103,7 +103,7 @@ function MakeTheForm($ValidationErrors) {
 
     // distros used label
    $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"form-control wide-label\">What distros have you used?<br>
-         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro\"</label>\n";
+         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" $CheckedSlug />$distro</label>";
 
     if (isset($distrosUsed) and $distrosUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
