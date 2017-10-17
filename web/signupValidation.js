@@ -25,6 +25,9 @@ function ValidateForm()
   {
     ValidationErrors += 'Last name is required!' + Crlf;
   }
+    
+  // second test spot
+  alert(ValidationErrors);
 
   // email
   if (document.signup.email.value == '') 
@@ -32,8 +35,7 @@ function ValidateForm()
     ValidationErrors += 'Email is required!' + CrLf;
   }
     
-  // second test spot
-  alert(ValidationErrors);
+  // test failed here
 
   // password
   if ((document.signup.pass1.value == '') || (document.signup.pass2.value == '')) 
