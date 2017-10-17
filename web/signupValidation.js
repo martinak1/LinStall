@@ -7,6 +7,8 @@ function ValidateForm() {
     return true;
   }
 
+  alert("It works!");
+
   var ValidationErrors = '';
   var CrLf = "\r\n\r\n";
 
@@ -38,6 +40,11 @@ function ValidateForm() {
   // state
   if (document.signup.state.value == '') {
     ValidationErrors += 'We want to know what state we can find you in!' + Crlf;
+  }
+    
+  // username 
+  if (document.signup.uName.value == '') {
+    ValidationErrors += 'You need to pick a username!' + Crlf;
   }
 
   // password

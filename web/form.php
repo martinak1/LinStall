@@ -320,7 +320,7 @@ elseif ($View == 'Submit Form') {
   }
 
   // build form tags
-  $UI .= "<form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
+  $UI .= "<form method=\"POST\" id=\"singup\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
   $UI .= "<h2>Linstall Account Creation</h2>\n";
 
   // append the js validator
