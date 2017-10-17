@@ -156,8 +156,8 @@ function MakeTheForm($ValidationErrors)
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
 
-  $TheForm .= "   <div class=\"Col-12 justify-content-center\">       
-          <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio: </label>      
+  $TheForm .= "   <div class=\"justify-content-center\">       
+          <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio</label>      
           <br>
           <div class=\"form-control\">
             <textarea name=\"bio\" id=\"bio\">$bio</textarea>
@@ -168,8 +168,9 @@ function MakeTheForm($ValidationErrors)
   //Hard coded small select for most hated distro
   if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
-        <div class=\"Col-4 container justify-content-center\">
+        <div class=\"Col-4 justify-content-center\">
            <label for=\"hatedDist\" class=\"WideLabel control-label\">$SplatSlug Most hated distro?</label>
+           <div class=\"form-control\">
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
   if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
@@ -184,6 +185,7 @@ function MakeTheForm($ValidationErrors)
   $TheForm .= "             <option value=\"Suse\" $SelectedSlug>Suse</option>";
   $TheForm .= "
            </select>
+           </div>
         </div>\n";
 
   //Multi-select using contents of text file with Options...
