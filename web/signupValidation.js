@@ -17,26 +17,12 @@ function ValidateForm()
   { 
     ValidationErrors += 'First name is required!' + CrLf;
   }
-  
-
-  // last name
-  if (document.signup.lName.value == '') 
-  {
-  // test alert got this far
-    ValidationErrors += 'Last name is required!' + Crlf;
-    // second test spot
-    alert(ValidationErrors);
-  }
     
-  // alert failed here
-
   // email
   if (document.signup.email.value == '') 
   {
     ValidationErrors += 'Email is required!' + CrLf;
   }
-    
-  // test failed here
 
   // password
   if ((document.signup.pass1.value == '') || (document.signup.pass2.value == '')) 
@@ -53,6 +39,8 @@ function ValidateForm()
   {
     ValidationErrors += 'Username is required!' + CrLf;
   }
+
+    alert($ValidationErrors);
     
   // street
   if (document.signup.street.value == '') 

@@ -245,10 +245,10 @@ elseif ($View == 'Submit Form') {
   //Validate what came back.
 
   // first name
-  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Please enter your name.";
+  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Please enter your first name.";
 
   // last name
-  if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Please enter your name.";
+  if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Please enter your first name.";
 
   // email
   if (!isset($email) or $email == '') 
