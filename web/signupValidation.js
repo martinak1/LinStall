@@ -18,14 +18,14 @@ function ValidateForm()
     ValidationErrors += 'First name is required!' + CrLf;
   }
   
-  // test alert got this far
 
   // last name
   if (document.signup.lName.value == '') 
   {
+  // test alert got this far
+    ValidationErrors += 'Last name is required!' + Crlf;
     // second test spot
     alert(ValidationErrors);
-    ValidationErrors += 'Last name is required!' + Crlf;
   }
     
   // alert failed here
