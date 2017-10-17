@@ -262,6 +262,11 @@ elseif ($View == 'Submit Form') {
   {
     $ValidationErrors['email'] = "The email  is not a valid format.";
   }
+  // street
+  if (!isset($street) or $street == '') $ValidationErrors['street'] = "Please enter your street address.";
+
+  // city 
+  if (!isset($city) or $city == '') $ValidationErrors['city'] = "Please enter the city where you live.";
 
   // zip
   if (!isset($zip) or strlen($zip) < 5) $ValidationErrors['zip'] = "Please enter your zip code.";
