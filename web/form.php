@@ -85,16 +85,17 @@ function MakeTheForm($ValidationErrors) {
             </p>  <br />   \n";
 
 
-  $TheForm .= "    </fieldset>
-    <fieldset><legend>Tell us about yourself!</legend>
-    </fieldset><br><br>\n";
+  $TheForm .= "    <h3>Tell us about yourself!</h3>
+    <br><br>\n";
 
   // distros used and favorite distro
   $distroFile = fopen('../distros','r');
 
   $favDistro= '';
 
-  $theForm .= "         <label for=\"distroUsed\" class=\"form-control\">Distros Used</label>\n";
+  $TheForm .= "       <div class = \"container justify-content-between\"><label for=\"used$distroNoSpaces\" class=\"WideLabel\">What distros have you used?<br>
+         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distrosUsed\" value=\"$distro\" $CheckedSlug />$distro
+       </label></div>\n";
   while ($distro = fgets($distroFile)) {
 
     $distro= trim($distro);
@@ -107,10 +108,9 @@ function MakeTheForm($ValidationErrors) {
     } else {
       $CheckedSlug = '';
     }
-    $TheForm .= "       <div class = \"container justify-content-between\"><label for=\"used$distroNoSpaces\" class=\"WideLabel\">What distros have you used?<br>
-         <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distrosUsed\" value=\"$distro\" $CheckedSlug />$distro
-       </label></div>\n";
+  
 
+    // favorite distro
     if (isset($favDistro) and $distro == $favDistro) {
       $CheckedSlug = 'checked';
     } else {
@@ -122,7 +122,6 @@ function MakeTheForm($ValidationErrors) {
   }
 
   $TheForm .= "
-    <fieldset>
       <div class=\"Row\">\n";
 
   // add bio to the form
@@ -167,15 +166,14 @@ function MakeTheForm($ValidationErrors) {
   while ($language = fgets($languageFile)) {
     $language = trim($language);
 
-    if (isset($MAOtherStatesVisited) and $MAOtherStatesVisited != '' and in_array($AState, $MAOtherStatesVisited)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
-    $TheForm .= "             <option value=\"$AState\" $SelectedSlug >$AState</option>\n";
+    if (isset($languagesKown) and $languagesKown!= '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    $TheForm .= "             <option value=\"$language\" $SelectedSlug >$language</option>\n";
   }
 
   $TheForm .= "          </select>
         </div>\n";
 
-  $TheForm .= "    </div>\n";
-  $TheForm .= " </fieldset>\n";
+  $TheForm .= "    </div>\n\n";
   return $TheForm;
 }
 
