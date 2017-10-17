@@ -93,8 +93,9 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <div class=\"container control-label\">
-          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label><br>\n";
+  $TheForm .= "       <div class=\"container\">
+          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label><br>\n
+          <div class=\"form-control\">";
 
   // build check boxes
   while ($distro = fgets($distroFile)) 
@@ -105,11 +106,11 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro";
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/>  $CheckedSlug $distro  ";
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
-      $CheckedSlug = 'checked';
+      $CheckedSlug = '@';
     } 
     else 
     {
@@ -117,10 +118,11 @@ function MakeTheForm($ValidationErrors) {
     }
   }
   
+  // reopen file for parsing 
   $distroFile = fopen('../distros','r');
-  // BROKEN
+
   // favorite distro label
-  $TheForm .= "\n</div\n><br>
+  $TheForm .= "\n</div>\n</div\n><br>
           <div class=\"contrainer justify-content-center\">\n
             <label for=\"favDistro\" class=\" wide-label\">Favorite Distro</label>\n
             <div class=\"form-control\">";
