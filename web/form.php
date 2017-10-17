@@ -94,10 +94,11 @@ function MakeTheForm($ValidationErrors) {
 
   // distros used label
   $TheForm .= "       <div class=\"container control-label\">
-          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n";
+          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label><br>\n";
 
   // build check boxes
-  while ($distro = fgets($distroFile)) {
+  while ($distro = fgets($distroFile)) 
+  {
 
     $distro= trim($distro);
     
@@ -106,9 +107,12 @@ function MakeTheForm($ValidationErrors) {
 
     $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
 
-    if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) {
+    if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
+    {
       $CheckedSlug = 'checked';
-    } else {
+    } 
+    else 
+    {
       $CheckedSlug = '';
     }
   }
@@ -117,10 +121,12 @@ function MakeTheForm($ValidationErrors) {
   // BROKEN
   // favorite distro label
   $favDistro .= "</div><br>
+          <div class=\"contrainer justify-content-center\">
           <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro\n";
 
   // build check boxes
-  while ($distro = fgets($distroFile)) {
+  while ($distro = fgets($distroFile)) 
+  {
 
     $distro= trim($distro);
     
@@ -129,15 +135,17 @@ function MakeTheForm($ValidationErrors) {
 
     $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro ";
 
-    if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) {
+    if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) 
+    {
       $CheckedSlug = 'checked';
     } 
-    else {
+    else 
+    {
       $CheckedSlug = '';
     }
   }
 
-  $TheForm .= "    </label></div><br><br>\n";
+  $TheForm .= "    </div><br><br>\n";
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
@@ -146,8 +154,7 @@ function MakeTheForm($ValidationErrors) {
           <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio: </label>      
             <textarea name=\"bio\" id=\"bio\">$bio</textarea>
         </div>
-        </div>
-      <div class=\"Row\"><br />";
+      <div class=\"container\"><br />";
 
   //Hard coded small select for most hated distro
   if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
@@ -180,7 +187,8 @@ function MakeTheForm($ValidationErrors) {
   $languageFile = fopen('../languages','r');
 
   // build language options
-  while ($language = fgets($languageFile)) {
+  while ($language = fgets($languageFile)) 
+  {
 
     $language = trim($language);
 
@@ -197,16 +205,18 @@ function MakeTheForm($ValidationErrors) {
 }
 
 //Mainline 
-//Set if initially $PoppedUp or not, then track it, used to control Close Window button
+//Set if initially visited or not, then track it, used to control Close Window button
 if (!isset($_REQUEST['View'])) {
   $View = 'First';
 } 
-else {
+else 
+{
   $View = $_REQUEST['View'];
 }
 
 // first time viewing today
-if ($View == 'First') {
+if ($View == 'First') 
+{
   //This is their first time at the page, explain stuff and make the form with empty $_POST...
   $UI = "  <h2>LinStall Forum Signup</h2>
    <form method=\"POST\" name=\"signup\" action=\"form.php\" onSubmit=\"return ValidateForm();\">\n";
@@ -234,10 +244,12 @@ elseif ($View == 'Submit Form') {
   if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Your last name is missing or empty.  Please enter your name before clicking Submit.";
 
   // email
-  if (!isset($email) or $email == '') {
+  if (!isset($email) or $email == '') 
+  {
     $ValidationErrors['email'] = "The email address is empty.  Please enter your email address before clicking Submit.";
   }
-  elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+  elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) 
+  {
     $ValidationErrors['email'] = "The email  is not a valid format.";
   }
 
