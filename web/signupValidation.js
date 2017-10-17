@@ -37,6 +37,8 @@ function ValidateForm()
   {
     ValidationErrors += 'Username is required!' + CrLf;
   }
+
+  alert("#2");
     
   // street
   if (document.signup.street.value == '') 
@@ -65,6 +67,8 @@ function ValidateForm()
   {
     ValidationErrors += 'Passwords entered are not the same.' + CrLf;
   }
+
+  alert("#4");
     
   // favorite distro
   if (document.signup.favDistro.value == '')
@@ -83,6 +87,8 @@ function ValidateForm()
   {
     ValidationErrors += 'I guess you like Tux too much to hate Linux!'+ Crlf;
   }
+
+  alert("#5");
 
   // bio
   if (document.signup.bio.value == '')
