@@ -94,7 +94,7 @@ function MakeTheForm($ValidationErrors) {
 
   // distros used label
   $TheForm .= "       <div class=\"container justify-content-center\">
-          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label><br>\n
+          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n
           <div class=\"form-control\">";
 
   // build check boxes
@@ -106,7 +106,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/>  $CheckedSlug $distro  ";
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
@@ -136,7 +136,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro";
+    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro ";
 
     if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) 
     {
