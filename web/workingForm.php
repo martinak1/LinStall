@@ -87,7 +87,6 @@ function MakeTheForm($ValidationErrors) {
 
   $TheForm .= "    </fieldset>
     <fieldset><legend>Tell us about yourself!</legend>
-$favDistro
     </fieldset>";
 
   // distros used and favorite distro
@@ -103,14 +102,15 @@ $favDistro
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    if (isset($distrosUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) {
+    if (isset($distrosUsed) and $distrosUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
     } else {
       $CheckedSlug = '';
     }
-    $TheForm .= "       <label for=\"Visited$distroNoSpaces\" class=\"WideLabel\">
+    $TheForm .= "       <label for=\"used$distroNoSpaces\" class=\"WideLabel\">What distros have you used?<br>
          <input type=\"checkbox\" name=\"distrosUsed[]\" id=\"used$distrosUsed\" value=\"$distro\" $CheckedSlug />$distro
        </label>\n";
+
     if (isset($favDistro) and $distro == $favDistro) {
       $CheckedSlug = 'checked';
     } else {
