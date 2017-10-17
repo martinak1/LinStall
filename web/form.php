@@ -93,7 +93,8 @@ function MakeTheForm($ValidationErrors) {
   $favDistro= '';
 
   // distros used label
-  $TheForm .= "       <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?\n";
+  $TheForm .= "       <div class=\"container control-label\">
+          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n";
 
   // build check boxes
   while ($distro = fgets($distroFile)) {
@@ -114,7 +115,7 @@ function MakeTheForm($ValidationErrors) {
   
   // BROKEN
   // favorite distro label
-  $favDistro .= "       </label>
+  $favDistro .= "</div>
           <label for=\"favDistro\" class=\"form-control wide-label\">Favorite Distro\n";
 
   // build check boxes
