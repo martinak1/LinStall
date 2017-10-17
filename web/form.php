@@ -103,7 +103,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\" class=\"form-control\"/>$CheckedSlug $distro";
+    $TheForm .= "<input type=\"checkbox\" name=\"distrosUsed[]\" id=\"distroUsed\" value=\"$distro\"/>$CheckedSlug $distro";
 
     if (isset($distrosUsed) and $distrosUsed != '' and in_array($distro, $distroUsed)) {
       $CheckedSlug = 'checked';
@@ -125,7 +125,7 @@ function MakeTheForm($ValidationErrors) {
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro";
+    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro ";
 
     if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) {
       $CheckedSlug = 'checked';
@@ -135,8 +135,7 @@ function MakeTheForm($ValidationErrors) {
     }
   }
 
-  $TheForm .= "    </label></div>\n
-      <div class=\"Row\">\n";
+  $TheForm .= "    </label></div><br><br>\n";
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
@@ -152,7 +151,7 @@ function MakeTheForm($ValidationErrors) {
   if (isset($ValidationErrors['hatedDist'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
         <div class=\"Col-4 container justify-content-center\">
-           <label class=\"col-sm-2 control-label\" for=\"hatedDist\" class=\"WideLabel\">$SplatSlug Most hated distro?</label>
+           <label for=\"hatedDist\" class=\"WideLabel control-label\">$SplatSlug Most hated distro?</label>
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
   if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
@@ -183,7 +182,7 @@ function MakeTheForm($ValidationErrors) {
 
     $language = trim($language);
 
-    if (isset($language) and $language != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    if (isset($languageKnown) and $languageKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
     $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
   }
@@ -191,7 +190,7 @@ function MakeTheForm($ValidationErrors) {
   $TheForm .= "          </select>
         </div>\n";
 
-  $TheForm .= "    </div>\n\n";
+  $TheForm .= "    </div><br><br>\n\n";
   return $TheForm;
 }
 
