@@ -112,7 +112,7 @@ function MakeTheForm($ValidationErrors)
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
-      $CheckedSlug = '@';
+      $CheckedSlug = 'checked';
     } 
     else 
     {
