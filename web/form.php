@@ -94,8 +94,9 @@ function MakeTheForm($ValidationErrors)
   $distroFile = fopen('../distros','r');
 
   // distros used label
+  if (isset($ValidationErrors['distUsed'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "       <div class=\"justify-content-center\">
-          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n
+          <label for=\"distroUsed\" class=\"wide-label\"> $SplatSlug What distros have you used?</label>\n
           <div class=\"form-control\">";
 
   // build check boxes
@@ -123,9 +124,10 @@ function MakeTheForm($ValidationErrors)
   $distroFile = fopen('../distros','r');
 
   // favorite distro label
+  if (isset($ValidationErrors['favDistro'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "\n</div>\n</div\n><br>
           <div class=\"justify-content-center\">\n
-            <label for=\"favDistro\" class=\" wide-label\">Favorite Distro</label>\n
+            <label for=\"favDistro\" class=\" wide-label\">$SplatSlug Favorite Distro</label>\n
             <div class=\"form-control\">";
 
   // build favDistro check boxes
@@ -153,7 +155,6 @@ function MakeTheForm($ValidationErrors)
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-
   $TheForm .= "   <div class=\"justify-content-center\">       
           <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio</label>      
           <br>
@@ -187,9 +188,10 @@ function MakeTheForm($ValidationErrors)
         </div>\n";
 
   //Multi-select using contents of text file with Options...
+  if (isset($ValidationErrors['languagesKnown'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
         <div class=\"Col-4 justify-content-center\">
-          <label class=\"sm-col-4\" for=\"languages\">Programming Languages known?<br />
+          <label class=\"sm-col-4\" for=\"languages\">$SplatSlug Programming Languages known?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
           <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
 
