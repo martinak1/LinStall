@@ -206,7 +206,7 @@ function MakeTheForm($ValidationErrors)
 
     if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
-    $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
+    $TheForm .= "             <option id=\"languageNoSpace\" value=\"$language\">$SelectedSlug $language</option>\n";
   }
 
   $TheForm .= "          </select>
