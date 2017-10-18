@@ -128,8 +128,17 @@ function MakeTheForm($ValidationErrors)
   if (isset($ValidationErrors['favDistro'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "\n</div>\n</div\n><br>
           <div class=\"justify-content-center\">\n
-            <label for=\"favDistro\" class=\" wide-label\">$SplatSlug Favorite Distro</label>\n
-            <div class=\"form-control\">";
+            <label for=\"favDistro\" class=\" wide-label\">$SplatSlug Favorite Distro</label>\n";
+ 
+    if (isset($distroNoSpaces) and $distroNoSpaces == $distro) 
+    {
+      $CheckedSlug = 'checked';
+    } 
+    else 
+    {
+      $CheckedSlug = '';
+    }
+  }           <div class=\"form-control\">";
 
   // build favDistro check boxes
   while ($distro = fgets($distroFile)) 
@@ -141,15 +150,6 @@ function MakeTheForm($ValidationErrors)
 
     $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"distroNoSpaces\" value=\"$distro\"> $CheckedSlug $distro ";
 
-    if (isset($distroNoSpaces) and $distroNoSpaces == $distro) 
-    {
-      $CheckedSlug = 'checked';
-    } 
-    else 
-    {
-      $CheckedSlug = '';
-    }
-  }
 
   $TheForm .= "    </div></div><br><br>\n";
 
@@ -206,7 +206,7 @@ function MakeTheForm($ValidationErrors)
 
     if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
-    $TheForm .= "             <option id=\"languageNoSpace\" value=\"$language\">$SelectedSlug $language</option>\n";
+    $TheForm .= "             <option id=\"$languageNoSpace\" value=\"$language\">$SelectedSlug $language</option>\n";
   }
 
   $TheForm .= "          </select>
