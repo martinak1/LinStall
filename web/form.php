@@ -94,7 +94,7 @@ function MakeTheForm($ValidationErrors)
   $distroFile = fopen('../distros','r');
 
   // distros used label
-  if (isset($ValidationErrors['distUsed'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
+  if (isset($ValidationErrors['distroUsed'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "       <div class=\"justify-content-center\">
           <label for=\"distroUsed\" class=\"wide-label\"> $SplatSlug What distros have you used?</label>\n
           <div class=\"form-control\">";
@@ -108,7 +108,8 @@ function MakeTheForm($ValidationErrors)
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
+    // [] at the end of distroUsed
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
@@ -245,6 +246,7 @@ elseif ($View == 'Submit Form') {
   $ValidationErrors = '';
   extract($_POST);
 
+
   //Validate what came back.
 
   // first name
@@ -274,6 +276,7 @@ elseif ($View == 'Submit Form') {
 
   // username
   if (!isset($uName) or $uName== '') $ValidationErrors['uName'] = "Please enter your desired username.";
+
   // street
   if (!isset($street) or $street == '') $ValidationErrors['street'] = "Please enter your street address.";
 
