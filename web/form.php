@@ -108,9 +108,6 @@ function MakeTheForm($ValidationErrors)
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    // [] at the end of distroUsed
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
-
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
       $CheckedSlug = 'checked';
@@ -119,6 +116,8 @@ function MakeTheForm($ValidationErrors)
     {
       $CheckedSlug = '';
     }
+
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"$CheckedSlug/> $distro ";
   }
   
   // reopen file for parsing 
@@ -140,8 +139,6 @@ function MakeTheForm($ValidationErrors)
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro ";
-
     if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) 
     {
       $CheckedSlug = 'checked';
@@ -150,6 +147,8 @@ function MakeTheForm($ValidationErrors)
     {
       $CheckedSlug = '';
     }
+
+    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\" $CheckedSlug> $distro ";
   }
 
   $TheForm .= "    </div></div><br><br>\n";
@@ -206,7 +205,7 @@ function MakeTheForm($ValidationErrors)
 
     if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
-    $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
+    $TheForm .= "             <option value=\"$language\" $SelectedSlug >$language</option>\n";
   }
 
   $TheForm .= "          </select>

@@ -80,7 +80,7 @@ function ValidateForm()
   // used distro                                                          
   if (document.signup.favDistro.value == '')                                  
   {                                                                           
-    ValidationErrors += 'Your favorite distro is required!' + CrLf;           
+    ValidationErrors += 'Tell us what distros you have used ' + CrLf;           
   }                                                                           
 
   // favorite distro                                                          
