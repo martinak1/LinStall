@@ -129,7 +129,6 @@ function MakeTheForm($ValidationErrors)
   $TheForm .= "\n</div>\n</div\n><br>
           <div class=\"justify-content-center\">\n
             <label for=\"favDistro\" class=\" wide-label\">$SplatSlug Favorite Distro</label>\n";
-  $TheForm .= "<div class=\"form-control\">";
 
     if (isset($distroNoSpaces) and $distroNoSpaces == $distro) 
     {
