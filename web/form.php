@@ -202,6 +202,7 @@ function MakeTheForm($ValidationErrors)
   {
 
     $language = trim($language);
+    $languageNoSpace = str_replace(' ', '', $language);
 
     if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
