@@ -9,20 +9,21 @@ function MakeTheForm($ValidationErrors)
   else 
   {
     //Set defaults
-    $fName      = '';
-    $lName      = '';
-    $email      = '';
-    $uname      = '';
-    $street     = '';
-    $city       = '';
-    $state      = '';
-    $zip        = '';
-    $pass1      = '';
-    $pass2      = '';
-    $favDistro  = '';
-    $distroUsed = '';
-    $hatedDist  = '';
-    $bio        = '';
+    $fName          = '';
+    $lName          = '';
+    $email          = '';
+    $uname          = '';
+    $street         = '';
+    $city           = '';
+    $state          = '';
+    $zip            = '';
+    $pass1          = '';
+    $pass2          = '';
+    $favDistro      = '';
+    $distroUsed     = '';
+    $hatedDist      = '';
+    $bio            = '';
+    $languagesKnown = '';
   }
 
   // error symbol 
@@ -200,7 +201,7 @@ function MakeTheForm($ValidationErrors)
 
     $language = trim($language);
 
-    if (isset($languageKnown) and $languageKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
     $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
   }
@@ -281,7 +282,7 @@ elseif ($View == 'Submit Form') {
   if (!isset($zip) or strlen($zip) < 5) $ValidationErrors['zip'] = "Please enter your zip code.";
 
   // bio
-  if (!isset($bio) or strlen($bio) < 50) $ValidationErrors['bio'] = "Please give a short description about yourself.";
+  if (!isset($bio) or strlen($bio) > 50) $ValidationErrors['bio'] = "Please give a short description about yourself.";
 
   // hated distro
   if (!isset($hatedDist) or $hatedDist == '') {
@@ -294,6 +295,9 @@ elseif ($View == 'Submit Form') {
 
   // least favorite distro 
   if (!isset($hatedDist) or $hatedDist == '') $ValidationErrors['hatedDist'] = "You must select your least favorite distro.";
+
+  // languages known
+  if (!isset($languagesKnown) or $languagesKnown == '') $ValidationErrors['languagesKnown'] = "You need to learn a language, pick one you are interested in!";
 
   // error output
   $UI = '';
