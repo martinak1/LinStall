@@ -9,20 +9,21 @@ function MakeTheForm($ValidationErrors)
   else 
   {
     //Set defaults
-    $fName      = '';
-    $lName      = '';
-    $email      = '';
-    $uname      = '';
-    $street     = '';
-    $city       = '';
-    $state      = '';
-    $zip        = '';
-    $pass1      = '';
-    $pass2      = '';
-    $favDistro  = '';
-    $distroUsed = '';
-    $hatedDist  = '';
-    $bio        = '';
+    $fName          = '';
+    $lName          = '';
+    $email          = '';
+    $uname          = '';
+    $street         = '';
+    $city           = '';
+    $state          = '';
+    $zip            = '';
+    $pass1          = '';
+    $pass2          = '';
+    $favDistro      = '';
+    $distroUsed     = '';
+    $hatedDist      = '';
+    $bio            = '';
+    $languagesKnown = '';
   }
 
   // error symbol 
@@ -93,8 +94,9 @@ function MakeTheForm($ValidationErrors)
   $distroFile = fopen('../distros','r');
 
   // distros used label
+  if (isset($ValidationErrors['distroUsed'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "       <div class=\"justify-content-center\">
-          <label for=\"distroUsed\" class=\"wide-label\">What distros have you used?</label>\n
+          <label for=\"distroUsed\" class=\"wide-label\"> $SplatSlug What distros have you used?</label>\n
           <div class=\"form-control\">";
 
   // build check boxes
@@ -106,11 +108,12 @@ function MakeTheForm($ValidationErrors)
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed[]\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
+    // [] at the end of distroUsed
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
 
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
-      $CheckedSlug = '@';
+      $CheckedSlug = 'checked';
     } 
     else 
     {
@@ -122,9 +125,10 @@ function MakeTheForm($ValidationErrors)
   $distroFile = fopen('../distros','r');
 
   // favorite distro label
+  if (isset($ValidationErrors['favDistro'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "\n</div>\n</div\n><br>
           <div class=\"justify-content-center\">\n
-            <label for=\"favDistro\" class=\" wide-label\">Favorite Distro</label>\n
+            <label for=\"favDistro\" class=\" wide-label\">$SplatSlug Favorite Distro</label>\n
             <div class=\"form-control\">";
 
   // build favDistro check boxes
@@ -152,7 +156,6 @@ function MakeTheForm($ValidationErrors)
 
   // add bio to the form
   if (isset($ValidationErrors['bio'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
-
   $TheForm .= "   <div class=\"justify-content-center\">       
           <label for=\"bio\" class=\" WideLabel\">$SplatSlug Bio</label>      
           <br>
@@ -186,9 +189,10 @@ function MakeTheForm($ValidationErrors)
         </div>\n";
 
   //Multi-select using contents of text file with Options...
+  if (isset($ValidationErrors['languagesKnown'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
         <div class=\"Col-4 justify-content-center\">
-          <label class=\"sm-col-4\" for=\"languages\">Programming Languages known?<br />
+          <label class=\"sm-col-4\" for=\"languages\">$SplatSlug Programming Languages known?<br />
           <span class=\"FinePrint\">(Ctrl-click for multiple)</span></label>
           <select name=\"languagesKnown[]\" id=\"languagesKnown\" size=\"12\" multiple>\n";
 
@@ -200,7 +204,7 @@ function MakeTheForm($ValidationErrors)
 
     $language = trim($language);
 
-    if (isset($languageKnown) and $languageKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
+    if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
     $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
   }
@@ -242,13 +246,14 @@ elseif ($View == 'Submit Form') {
   $ValidationErrors = '';
   extract($_POST);
 
+
   //Validate what came back.
 
   // first name
-  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Please enter your name.";
+  if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Please enter your first name.";
 
   // last name
-  if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Please enter your name.";
+  if (!isset($lName) or $lName == '') $ValidationErrors['lName'] = "Please enter your first name.";
 
   // email
   if (!isset($email) or $email == '') 
@@ -260,8 +265,18 @@ elseif ($View == 'Submit Form') {
     $ValidationErrors['email'] = "The email  is not a valid format.";
   }
 
+  // password
+  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) 
+  {
+    $ValidationErrors['pass1'] = "Enter your password twice, please.";
+  }
+  elseif ($pass1 != $pass1) {
+    $ValidationErrors['pass1'] = "Passwords do not match.";
+  }
+
   // username
   if (!isset($uName) or $uName== '') $ValidationErrors['uName'] = "Please enter your desired username.";
+
   // street
   if (!isset($street) or $street == '') $ValidationErrors['street'] = "Please enter your street address.";
 
@@ -272,7 +287,7 @@ elseif ($View == 'Submit Form') {
   if (!isset($zip) or strlen($zip) < 5) $ValidationErrors['zip'] = "Please enter your zip code.";
 
   // bio
-  if (!isset($bio) or strlen($bio) < 50) $ValidationErrors['bio'] = "Please give a short description about yourself.";
+  if (!isset($bio) or strlen($bio) > 50) $ValidationErrors['bio'] = "Please give a short description about yourself.";
 
   // hated distro
   if (!isset($hatedDist) or $hatedDist == '') {
@@ -286,14 +301,8 @@ elseif ($View == 'Submit Form') {
   // least favorite distro 
   if (!isset($hatedDist) or $hatedDist == '') $ValidationErrors['hatedDist'] = "You must select your least favorite distro.";
 
-  // password
-  if ((!isset($pass1) or $pass1  == '') or (!isset($pass2) or $pass2  == '')) 
-  {
-    $ValidationErrors['pass1'] = "Enter your password twice, please.";
-  }
-  elseif ($pass1 != $pass1) {
-    $ValidationErrors['pass1'] = "Passwords do not match.";
-  }
+  // languages known
+  if (!isset($languagesKnown) or $languagesKnown == '') $ValidationErrors['languagesKnown'] = "You need to learn a language, pick one you are interested in!";
 
   // error output
   $UI = '';
