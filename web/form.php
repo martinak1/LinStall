@@ -108,6 +108,9 @@ function MakeTheForm($ValidationErrors)
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
+    // [] at the end of distroUsed
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
+
     if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
     {
       $CheckedSlug = 'checked';
@@ -117,9 +120,6 @@ function MakeTheForm($ValidationErrors)
       $CheckedSlug = '';
     }
   }
-    // [] at the end of distroUsed
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroNoSpaces\" value=\"$distro\"/> $CheckedSlug $distro ";
-
   
   // reopen file for parsing 
   $distroFile = fopen('../distros','r');
@@ -128,9 +128,21 @@ function MakeTheForm($ValidationErrors)
   if (isset($ValidationErrors['favDistro'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "\n</div>\n</div\n><br>
           <div class=\"justify-content-center\">\n
-            <label for=\"favDistro\" class=\" wide-label\">$SplatSlug Favorite Distro</label>\n";
+            <label for=\"favDistro\" class=\" wide-label\">$SplatSlug Favorite Distro</label>\n
+            <div class=\"form-control\">";
 
-    if (isset($distroNoSpaces) and $distroNoSpaces == $distro) 
+  // build favDistro check boxes
+  while ($distro = fgets($distroFile)) 
+  {
+
+    $distro= trim($distro);
+    
+    //Used to make id with no spaces so extract() will work 
+    $distroNoSpaces = str_replace(' ','',$distro);  
+
+    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro ";
+
+    if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) 
     {
       $CheckedSlug = 'checked';
     } 
@@ -138,19 +150,7 @@ function MakeTheForm($ValidationErrors)
     {
       $CheckedSlug = '';
     }
-  }           
-  
-
-  // build favDistro check boxes
-  while ($distro = fgets($distroFile)) 
-  {
-    $distro= trim($distro);
-    
-    //Used to make id with no spaces so extract() will work 
-    $distroNoSpaces = str_replace(' ','',$distro);  
-
-    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"distroNoSpaces\" value=\"$distro\"> $CheckedSlug $distro ";
-
+  }
 
   $TheForm .= "    </div></div><br><br>\n";
 
@@ -203,11 +203,10 @@ function MakeTheForm($ValidationErrors)
   {
 
     $language = trim($language);
-    $languageNoSpace = str_replace(' ', '', $language);
 
     if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
-    $TheForm .= "             <option id=\"$languageNoSpace\" value=\"$language\">$SelectedSlug $language</option>\n";
+    $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
   }
 
   $TheForm .= "          </select>
