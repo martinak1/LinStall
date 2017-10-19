@@ -87,6 +87,9 @@ function MakeTheForm($ValidationErrors)
             <input class=\"form-control\" type=\"text\" name=\"zip\" id=\"zip\" value=\"$zip\"/>
             </p>  <br />   \n";
 
+  // checkboxes &ct.
+  // =====================================================================================================
+
 
   $TheForm .= "    <h3>Tell us about yourself!</h3>
     <br><br>\n";
@@ -96,19 +99,18 @@ function MakeTheForm($ValidationErrors)
   // distros used label
   if (isset($ValidationErrors['distroUsed'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "       <div class=\"justify-content-center\">
-          <label for=\"distroUsed\" class=\"wide-label\"> $SplatSlug What distros have you used?</label>\n
+          <label for=\"distroUsed\" name=\"distroUsed[]\" class=\"wide-label\"> $SplatSlug What distros have you used?</label>\n
           <div class=\"form-control\">";
 
   // build check boxes
   while ($distro = fgets($distroFile)) 
   {
-
     $distro = trim($distro);
     
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
+    if (isset($distroNoSpaces) and $distroNoSpaces != '' and in_array($distroNoSpaces, $distroUsed)) 
     {
       $CheckedSlug = 'checked';
     } 
@@ -119,6 +121,9 @@ function MakeTheForm($ValidationErrors)
 
     $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"$CheckedSlug/> $distro ";
   }
+
+  //end distro used
+  //=========================================================================================
   
   // reopen file for parsing 
   $distroFile = fopen('../distros','r');
@@ -188,6 +193,7 @@ function MakeTheForm($ValidationErrors)
         </div>\n";
 
   //Multi-select using contents of text file with Options...
+  //===================================================================================================
   if (isset($ValidationErrors['languagesKnown'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
         <div class=\"Col-4 justify-content-center\">
@@ -247,6 +253,7 @@ elseif ($View == 'Submit Form') {
 
 
   //Validate what came back.
+  //==============================================================================================
 
   // first name
   if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Please enter your first name.";
