@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- fav icon -->
+    <link rel="shortcut icon" href="./SiteThumb.jpg">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  </head>
+  <body>
+    <!--Site nav bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <!--Logo and brand name-->
+      <a class="navbar-brand" href="#">
+        <img src="./assets/img/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="LinStall Logo">
+        LinStall | The One Stop Shop for Linux Installers
+      </a>
+                
+      <!--Nav bar links-->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="./index.html">Shop<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Forums</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            |
+          <button class="btn btn-outline-success my-2 my-sm-0" type="link">Log In</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- dynamic content is inserted here -->
+    <div class="container justify-content-between">
+      [[[DynamicContent]]]
+    </div>
+
+    <!-- form validation js -->
+    <script src="signupValidation.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="assets/js/jquery-3.2.1.slim.min.js"/>
+    <script src="assets/js/umd/popper.min.js"/>
+    <script src="assets/js/bootstrap.min.js"/> 
+
+  </body>
+  
+  <footer>
+    <div class="footer align-bottom">
+      <div class="container">
+        <br>
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <iframe src="https://ghbtns.com/github-btn.html?user=martinak1&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="220px" height="30px"></iframe> 
+      </div>
+    </div>
+  </footer>
+</html>

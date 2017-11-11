@@ -1,5 +1,8 @@
 <?php
 
+require(dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)) . "/SiteSettings.php");
+AllowLogginIn();
+
 function MakeTheForm($ValidationErrors) 
 {
   if (isset($_POST['fName'])) 
@@ -221,6 +224,85 @@ function MakeTheForm($ValidationErrors)
   return $TheForm;
 }
 
+// Update the database with user input
+function UpdateMemberApp()
+{
+    $FormData = $_POST;
+
+    foreach ($FormData as $FieldName => $FieldValue)
+    {
+        if (is_array($FormData[$FieldName]))
+        {
+            foreach ($FormData[$FieldName] as $Elt => $EltValue)
+            {
+                $FormData[$FieldName][$Elt] = addslashes($EltValue);
+            }
+        }
+        else
+        {
+            $FormData[$FieldName] = addslashes($FieldValue);
+        }
+    }
+
+    extract($FormData);
+
+    if (isset($MAId))
+    {
+        $Verb  = 'update';
+        $Where = "where MAId=$MAId";
+    }
+    else
+    {
+        $Verb  = 'insert into';
+        $Where = '';
+    }
+
+    if (is_array($distrosUsed))
+    {
+        $distrosUsed = implode('|', $distroUsed);
+    }
+
+    if (is_array($languagesKnown))
+    {
+        $languagesKnown = implode('|', $languagesKnown);
+    }
+
+    $MaUserAgent    = addslashes($_SERVER['HTTP_USER_AGENT']);
+    $MAIPAddress    = addslashes($_SERVER['REMOTE_ADDR']);
+    $MAUserID       = $_SESSION['LoginId'];
+
+    $SQLStmt        = "$Verb MembershipApps set fName='$fName',
+                            lName='$lName',
+                            email='$email',
+                            uName='$uName',
+                            street='$street',
+                            city='$city',
+                            stage='$state',
+                            zip='$zip',
+                            pass='$pass1',
+                            favDistro='$favDistro',
+                            distroUsed='$distroUsed',
+                            hatedDistro='$hatedDistro',
+                            bio='$bio',
+                            languagesKnown='$languagesKnown',
+                            MAUserAgeng='$MAUserAgent',
+                            MAIPAddress='$MAIPAddress'
+                        $Where";
+
+    mysql_query($SQLStmt) or die("Couldn't update database with '$SQLStmt'...");
+
+    if (isset($MAId))
+    {
+        return $MAId;
+    }
+    else
+    {
+        $MAId = mysql_insert_id();
+    }
+
+    return MAId;
+}
+
 //Mainline 
 //Set if initially visited or not, then track it, used to control Close Window button
 if (!isset($_REQUEST['View'])) {
@@ -244,7 +326,7 @@ if ($View == 'First')
 </form>";
 } 
 // submitting the form
-elseif ($View == 'Submit Form') {
+elseif ($View == UpdateMemberApp()) {
   //They've filled in the form and clicked the Submit button, should be error free unless they've disabled JavaScript
   //on their browser or the content is submitted by a bot.  
 
