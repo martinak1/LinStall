@@ -1,5 +1,8 @@
 <?php
 
+require(dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)) . "/SiteSettings.php");
+#AllowLogginIn();
+
 function MakeTheForm($ValidationErrors) 
 {
   if (isset($_POST['fName'])) 
@@ -87,6 +90,9 @@ function MakeTheForm($ValidationErrors)
             <input class=\"form-control\" type=\"text\" name=\"zip\" id=\"zip\" value=\"$zip\"/>
             </p>  <br />   \n";
 
+  // checkboxes &ct.
+  // =====================================================================================================
+
 
   $TheForm .= "    <h3>Tell us about yourself!</h3>
     <br><br>\n";
@@ -96,22 +102,18 @@ function MakeTheForm($ValidationErrors)
   // distros used label
   if (isset($ValidationErrors['distroUsed'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "       <div class=\"justify-content-center\">
-          <label for=\"distroUsed\" class=\"wide-label\"> $SplatSlug What distros have you used?</label>\n
+          <label for=\"distroUsed\" name=\"distroUsed[]\" class=\"wide-label\"> $SplatSlug What distros have you used?</label>\n
           <div class=\"form-control\">";
 
   // build check boxes
   while ($distro = fgets($distroFile)) 
   {
-
     $distro = trim($distro);
     
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    // [] at the end of distroUsed
-    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"/> $CheckedSlug $distro ";
-
-    if (isset($distroUsed) and $distroUsed != '' and in_array($distro, $distroUsed)) 
+    if (isset($distroNoSpaces) and $distroNoSpaces != '' and in_array($distroNoSpaces, $distroUsed)) 
     {
       $CheckedSlug = 'checked';
     } 
@@ -119,7 +121,12 @@ function MakeTheForm($ValidationErrors)
     {
       $CheckedSlug = '';
     }
+
+    $TheForm .= "<input type=\"checkbox\" name=\"distroUsed\" id=\"distroUsed\" value=\"$distro\"$CheckedSlug/> $distro ";
   }
+
+  //end distro used
+  //=========================================================================================
   
   // reopen file for parsing 
   $distroFile = fopen('../distros','r');
@@ -140,8 +147,6 @@ function MakeTheForm($ValidationErrors)
     //Used to make id with no spaces so extract() will work 
     $distroNoSpaces = str_replace(' ','',$distro);  
 
-    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\"> $CheckedSlug $distro ";
-
     if (isset($distroNoSpaces) and $distroNoSpaces == $favDistro) 
     {
       $CheckedSlug = 'checked';
@@ -150,6 +155,8 @@ function MakeTheForm($ValidationErrors)
     {
       $CheckedSlug = '';
     }
+
+    $TheForm .= "<input type=\"radio\" name=\"favDistro\" id=\"favDistro\" value=\"$distro\" $CheckedSlug> $distro ";
   }
 
   $TheForm .= "    </div></div><br><br>\n";
@@ -173,7 +180,7 @@ function MakeTheForm($ValidationErrors)
            <div class=\"form-control\">
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
-  if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($hatedDist == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "            <option value=\"fedora\" $SelectedSlug>Fedora</option>\n";
   if ($hatedDist == 'Debian') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Debian\" $SelectedSlug>Debian</option>\n";
@@ -189,6 +196,7 @@ function MakeTheForm($ValidationErrors)
         </div>\n";
 
   //Multi-select using contents of text file with Options...
+  //===================================================================================================
   if (isset($ValidationErrors['languagesKnown'])) { $SplatSlug = $RedSplat; } else { $SplatSlug = ''; }
   $TheForm .= "
         <div class=\"Col-4 justify-content-center\">
@@ -206,7 +214,7 @@ function MakeTheForm($ValidationErrors)
 
     if (isset($languagesKnown) and $languagesKnown != '' and in_array($language, $languagesKnown)) { $SelectedSlug = 'selected'; } else { $SelectedSlug = ''; }
 
-    $TheForm .= "             <option value=\"$language\">$SelectedSlug $language</option>\n";
+    $TheForm .= "             <option value=\"$language\" $SelectedSlug >$language</option>\n";
   }
 
   $TheForm .= "          </select>
@@ -214,6 +222,85 @@ function MakeTheForm($ValidationErrors)
 
   $TheForm .= "    </div><br><br>\n\n";
   return $TheForm;
+}
+
+// Update the database with user input
+function UpdateMemberApp()
+{
+    $FormData = $_POST;
+
+    foreach ($FormData as $FieldName => $FieldValue)
+    {
+        if (is_array($FormData[$FieldName]))
+        {
+            foreach ($FormData[$FieldName] as $Elt => $EltValue)
+            {
+                $FormData[$FieldName][$Elt] = addslashes($EltValue);
+            }
+        }
+        else
+        {
+            $FormData[$FieldName] = addslashes($FieldValue);
+        }
+    }
+
+    extract($FormData);
+
+    if (isset($MAId))
+    {
+        $Verb  = 'update';
+        $Where = "where MAId=$MAId";
+    }
+    else
+    {
+        $Verb  = 'insert into';
+        $Where = '';
+    }
+
+    if (is_array($distrosUsed))
+    {
+        $distrosUsed = implode('|', $distroUsed);
+    }
+
+    if (is_array($languagesKnown))
+    {
+        $languagesKnown = implode('|', $languagesKnown);
+    }
+
+    $MaUserAgent    = addslashes($_SERVER['HTTP_USER_AGENT']);
+    $MAIPAddress    = addslashes($_SERVER['REMOTE_ADDR']);
+    $MAUserID       = $_SESSION['LoginId'];
+
+    $SQLStmt        = "$Verb MembershipApps set fName='$fName',
+                            lName='$lName',
+                            email='$email',
+                            uName='$uName',
+                            street='$street',
+                            city='$city',
+                            stage='$state',
+                            zip='$zip',
+                            pass='$pass1',
+                            favDistro='$favDistro',
+                            distroUsed='$distroUsed',
+                            hatedDist='$hatedDist',
+                            bio='$bio',
+                            languagesKnown='$languagesKnown',
+                            MAUserAgeng='$MAUserAgent',
+                            MAIPAddress='$MAIPAddress'
+                        $Where";
+
+    mysql_query($SQLStmt) or die("Couldn't update database with '$SQLStmt'...");
+
+    if (isset($MAId))
+    {
+        return $MAId;
+    }
+    else
+    {
+        $MAId = mysql_insert_id();
+    }
+
+    return MAId;
 }
 
 //Mainline 
@@ -239,7 +326,7 @@ if ($View == 'First')
 </form>";
 } 
 // submitting the form
-elseif ($View == 'Submit Form') {
+elseif ($View == UpdateMemberApp()) {
   //They've filled in the form and clicked the Submit button, should be error free unless they've disabled JavaScript
   //on their browser or the content is submitted by a bot.  
 
@@ -248,6 +335,7 @@ elseif ($View == 'Submit Form') {
 
 
   //Validate what came back.
+  //==============================================================================================
 
   // first name
   if (!isset($fName) or $fName == '') $ValidationErrors['fName'] = "Please enter your first name.";
