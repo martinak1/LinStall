@@ -5,7 +5,7 @@ CREATE TABLE MembershipApps (
     uname varchar(30) DEFAULT NULL,
     email varchar(50) DEFAULT NULL,
     street varchar(100) DEFAULT NULL,
-    city varchar(50) DEFAULT NULL<>
+    city varchar(50) DEFAULT NULL,
     state varchar(20) DEFAULT NULL,
     zip int(10) DEFAULT NULL,
     pass1 varchar(50) DEFAULT NULL,
