@@ -1,6 +1,6 @@
 <?php
 require(dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)) . "/SiteSettings.php" );
-AllowLoggedIn();
+#AllowLoggedIn();
 if (isset($_SESSION['ControllerMsg'])) {
   $MsgSlug = "<p>" .$_SESSION['ControllerMsg']."</p>\n";
   unset($_SESSION['ControllerMsg']);
