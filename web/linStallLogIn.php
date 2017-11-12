@@ -6,6 +6,7 @@ if (isset($_SESSION['LoginId'])) {
   header("Location: linStallController.php");
   exit;
 }
+
 function MakeLoginForm() {
   if (isset($_POST)) extract($_POST);
   $LoginIdSlug = '';
@@ -28,6 +29,7 @@ function MakeLoginForm() {
 
   ";
 }
+
 function AuthAt2017Winter($UserId, $HashedPassword) {
   $UserId = addslashes($UserId);
   $POST['LoginId']=$UserId;
