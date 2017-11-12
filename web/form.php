@@ -180,7 +180,7 @@ function MakeTheForm($ValidationErrors)
            <div class=\"form-control\">
            <select name=\"hatedDist\" id=\"hatedDist\" size=\"5\">
  ";
-  if ($hatedDistro == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
+  if ($hatedDist == "Fedora") { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "            <option value=\"fedora\" $SelectedSlug>Fedora</option>\n";
   if ($hatedDist == 'Debian') { $SelectedSlug = "selected"; } else { $SelectedSlug = ''; }
   $TheForm .= "             <option value=\"Debian\" $SelectedSlug>Debian</option>\n";
@@ -282,7 +282,7 @@ function UpdateMemberApp()
                             pass='$pass1',
                             favDistro='$favDistro',
                             distroUsed='$distroUsed',
-                            hatedDistro='$hatedDistro',
+                            hatedDist='$hatedDist',
                             bio='$bio',
                             languagesKnown='$languagesKnown',
                             MAUserAgeng='$MAUserAgent',

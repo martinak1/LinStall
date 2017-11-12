@@ -122,7 +122,7 @@ if ($View == 'First') {
 }
 $FormTemplate = file_get_contents('template.html');
 $FormTemplate = str_replace('[[[LoginAdvice]]]', "Logging in...", $FormTemplate);
-$FormTemplate = str_replace('[[[TheForm]]]', $TheForm, $FormTemplate);
+$FormTemplate = str_replace('[[[DynamicContent]]]', $TheForm, $FormTemplate);
 echo $FormTemplate;
 exit;
 ?>
