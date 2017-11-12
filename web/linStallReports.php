@@ -3,7 +3,7 @@ require(dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)) . "/SiteSettings.php" );
 AllowLoggedIn();
 if (!isset($_REQUEST["View"])) {
   $_SESSION['ControllerMsg'] = "Somehow, no report was selected.  Please click a link below and don't be wandering around the data...";
-  header("Location: SeSDoCController.php");
+  header("Location: linStallController.php");
   exit;
 } 
 $Cnxn = mysql_connect('localhost', 'sespop', 'sespop');

@@ -3,7 +3,7 @@ session_name('LinStall');
 session_start();
 if (isset($_SESSION['LoginId'])) {
   $_SESSION['MenuMsg'] = "<p>You are logged in as '" . $_SESSION['LoginId'] . "'...</p>";
-  header("Location: SeSDoCController.php");
+  header("Location: linStallController.php");
   exit;
 }
 function MakeLoginForm() {
@@ -95,7 +95,7 @@ if ($View == 'First') {
 	header("Location: ". $_SESSION['URLAfterLogIn']);
 	unset($_SESSION['URLAfterLogIn']);
       } else {
-        header("Location: SeSDoCController.php");
+        header("Location: linStallController.php");
       }
       exit;
     } else {
