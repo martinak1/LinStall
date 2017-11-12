@@ -1,6 +1,6 @@
 <?php
 require(dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)) . "/SiteSettings.php" );
-AllowLoggedIn();
+//AllowLoggedIn();
 $SQLStmt = "select fName, lName, email, uname, street, city, state, zip, favDistro,
         distroUsed, hatedDist, bio, languagesKnown
 	    from MembershipApps

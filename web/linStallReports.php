@@ -6,14 +6,14 @@ if (!isset($_REQUEST["View"])) {
   header("Location: linStallController.php");
   exit;
 } 
-$Cnxn = mysql_connect('localhost', 'sespop', 'sespop');
+$Cnxn = mysql_connect('localhost', 'amartin', 'Artin');
 if (!$Cnxn) {
   print "Unable to connect to the MySQL server at this time...";
   exit;
 } 
-$DB = mysql_select_db('SeSPoP', $Cnxn);
+$DB = mysql_select_db('amartin', $Cnxn);
 if (!$DB) {
-  print "Unable to select the SeSPoP database at this time...";
+  print "Unable to select the LinStall MembershipApps  database at this time...";
   exit;
 }
 extract($_REQUEST);
