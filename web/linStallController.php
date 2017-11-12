@@ -1,6 +1,6 @@
 <?php
 require(dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)) . "/SiteSettings.php" );
-#AllowLoggedIn();
+//AllowLoggedIn();
 if (isset($_SESSION['ControllerMsg'])) {
   $MsgSlug = "<p>" .$_SESSION['ControllerMsg']."</p>\n";
   unset($_SESSION['ControllerMsg']);
@@ -28,7 +28,7 @@ $MsgSlug
 </main>
 ";
 $FormTemplate = file_get_contents('template.html');
-$FormTemplate = str_replace('[[[LoginAdvice]]]', LoginAdvice(''), $FormTemplate);
+//$FormTemplate = str_replace('[[[LoginAdvice]]]', LoginAdvice(''), $FormTemplate);
 $FormTemplate = str_replace('[[[TheForm]]]', $TheForm, $FormTemplate);
 echo $FormTemplate;
 exit;
