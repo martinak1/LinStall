@@ -1,7 +1,7 @@
 <?php
 
 require(dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)) . "/SiteSettings.php");
-AllowLogginIn();
+#AllowLogginIn();
 
 function MakeTheForm($ValidationErrors) 
 {
