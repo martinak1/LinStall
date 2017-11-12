@@ -103,8 +103,8 @@ if ($View == "ByRegion") {
     $Report = "No valid report was selected...";  
 }
 $ReportTemplate = file_get_contents('template.html');
-$ReportTemplate = str_replace('[[[LoginAdvice]]]', LoginAdvice(" | <a href=\"linStallController.php\">Menu</a> "), $ReportTemplate);
-$ReportTemplate = str_replace('[[[TheForm]]]', $Report, $ReportTemplate);
+//$ReportTemplate = str_replace('[[[LoginAdvice]]]', LoginAdvice(" | <a href=\"linStallController.php\">Menu</a> "), $ReportTemplate);
+$ReportTemplate = str_replace('[[[DynamicContent]]]', $Report, $ReportTemplate);
 echo $ReportTemplate;
 exit;
 
