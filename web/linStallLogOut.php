@@ -6,8 +6,8 @@ $TheForm = "<h1>Logged Out...</h1>
    <p>Click <a href=\"linStallLogIn.php\">Log In</a> to log in again.</p>
    ";
 $FormTemplate = file_get_contents('template.html');
-$FormTemplate = str_replace('[[[LoginAdvice]]]', '&nbsp;', $FormTemplate);
-$FormTemplate = str_replace('[[[TheForm]]]', $TheForm, $FormTemplate);
+//$FormTemplate = str_replace('[[[LoginAdvice]]]', '&nbsp;', $FormTemplate);
+$FormTemplate = str_replace('[[[DynamicContent]]]', $TheForm, $FormTemplate);
 echo $FormTemplate;
 exit;
 ?>
