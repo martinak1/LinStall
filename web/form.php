@@ -285,7 +285,7 @@ function UpdateMemberApp()
                             hatedDist='$hatedDist',
                             bio='$bio',
                             languagesKnown='$languagesKnown',
-                            MAUserAgeng='$MAUserAgent',
+                            MAUserAgent='$MAUserAgent',
                             MAIPAddress='$MAIPAddress'
                         $Where";
 

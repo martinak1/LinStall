@@ -38,7 +38,7 @@ if ($MACount == 0) {
 }
 $FormTemplate = file_get_contents('template.html');
 //$FormTemplate = str_replace('[[[LoginAdvice]]]', LoginAdvice("<a href=\"linStallController.php\">Menu</a> "), $FormTemplate);
-$FormTemplate = str_replace('[[[TheForm]]]', $UI, $FormTemplate);
+$FormTemplate = str_replace('[[[DynamicContent]]]', $UI, $FormTemplate);
 echo $FormTemplate;
 exit;
 ?>
