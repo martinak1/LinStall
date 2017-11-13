@@ -20,8 +20,8 @@ $MsgSlug
   <div class=\"Col-6\">
    <h2>LinStall Reports</h2>
     <ul>
-      <li><a href=\"linStallReports.php?View=TopTen\">Top Ten Donations</a></li>
-      <li><a href=\"linStallReports.php?View=ByRegion\">Donations by Region</a></li>
+      <li><a href=\"linStallReports.php?View=TopTen\">Top Ten Sales</a></li>
+      <li><a href=\"linStallReports.php?View=ByRegion\">Sales by Region</a></li>
       <li><a href=\"linStallReports.php?View=SelectRegion\">Details for Selected Region</a></li>
     </ul>
   </div>

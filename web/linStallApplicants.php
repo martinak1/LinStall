@@ -37,7 +37,7 @@ if ($MACount == 0) {
   $UI .= "</table>\n</div>\n\n<br /><br /><p>This is an incomplete listing, please show more...</p>";
 }
 $FormTemplate = file_get_contents('template.html');
-$FormTemplate = str_replace('[[[LoginAdvice]]]', LoginAdvice("<a href=\"linStallController.php\">Menu</a> "), $FormTemplate);
+//$FormTemplate = str_replace('[[[LoginAdvice]]]', LoginAdvice("<a href=\"linStallController.php\">Menu</a> "), $FormTemplate);
 $FormTemplate = str_replace('[[[TheForm]]]', $UI, $FormTemplate);
 echo $FormTemplate;
 exit;
